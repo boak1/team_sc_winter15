@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
 	//list of platforms
-	public static List<GameObject> platform_list;
+	public List<GameObject> platform_list;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         Screen.SetResolution (800, 600, false);
 
 		platform_list = new List<GameObject> ();
