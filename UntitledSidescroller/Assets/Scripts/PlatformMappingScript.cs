@@ -12,12 +12,11 @@ public class PlatformMappingScript : MonoBehaviour {
         {
             foreach (GameObject platform in GM_Script.platform_list)
             {
-                platformQueue.Enqueue(platform); // @@@!!! MUST FIND A WAY TO ENQUEUE ONLY THE PLATFORMS IN THE LIST THAT ARE INSIDE THE CAMERA !!!@@@
+                if (-6 <= platform.transform.position.x && platform.transform.position.x <= 6){
+                    platformQueue.Enqueue(platform);                   
+                }
             }
-            //platformQueue.Enqueue(GM_Script.platform_list[0]);
-            //Debug.Log(platformQueue.Dequeue());
-        }
-        
+        }         
 	}
 	
 	// Update is called once per frame
