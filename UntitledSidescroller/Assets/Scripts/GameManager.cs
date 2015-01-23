@@ -46,7 +46,8 @@ public class GameManager : MonoBehaviour {
 
     /// <summary>
     /// The comparison function used to sort the list
-    /// @@@!!!Currently only by x coordinates of platforms - just add a boolean once we implement vertical!!!@@@
+    /// @@@!!! Currently only by x coordinates of platforms and ascending from the left - just add a boolean once we implement vertical !!!@@@
+    /// @@@!!! Turns ou we have to implement booleans if we want to go right and opposite directions !!!@@@
     /// </summary>
     /// <param name="object1"></param>
     /// <param name="object2"></param>
