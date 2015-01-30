@@ -5,16 +5,16 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
 	//list of platforms
-	public List<GameObject> platform_list;
+	public List<GameObject> platformList;
 
 	// Use this for initialization
 	void Awake () {
         Screen.SetResolution (800, 600, false);
 
-		platform_list = new List<GameObject> ();
+		platformList = new List<GameObject> ();
 		AddAllPlatforms ();
 
-        platform_list.Sort(CompareByCoordinates);
+        platformList.Sort(CompareByCoordinates);
 
         //foreach (GameObject p in platform_list)
         //    Debug.Log(p.transform.position.x);
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     /// <param name="platform"></param>
 	public void AddPlatform (GameObject platform) {
-		platform_list.Add (platform);
+		platformList.Add (platform);
 	}
 
     /// <summary>
