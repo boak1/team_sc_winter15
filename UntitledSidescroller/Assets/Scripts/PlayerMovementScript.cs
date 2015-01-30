@@ -41,20 +41,24 @@ public class PlayerMovementScript : MonoBehaviour {
 		}
 
 
-
-		if (Input.GetKeyDown (KeyCode.E) && positionQueue != 0) {
+		 if (Input.GetKeyDown (KeyCode.Q)) {
 			dblTapA = false;
 			dblTapD = false;
-			cooldown = 0;
+			cooldown = -1;
+			
+			positionQueue = 0;
+		}
 
+
+		else if (Input.GetKeyDown (KeyCode.E)) {
+			dblTapA = false;
+			dblTapD = false;
+			cooldown = -1;
+
+			positionQueue = platMap.platformQueue.Count - 1;
 				}
 
-		else if (Input.GetKeyDown (KeyCode.Q) && positionQueue != 0) {
-			dblTapA = false;
-			dblTapD = false;
-			cooldown = 0;
-			
-		}
+
 
         else if (Input.GetKeyDown(KeyCode.A) && positionQueue != 0){
 			dblTapD = false;
