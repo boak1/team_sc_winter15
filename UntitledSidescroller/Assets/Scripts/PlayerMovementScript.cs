@@ -7,10 +7,11 @@ public class PlayerMovementScript : MonoBehaviour {
     GameManager GM;
     PlatformMappingScript platMap;
 
-    float dbltapCooldown = 0.5f;
+    float dbltapCooldown = .155f;
     int keyDCount = 0;
     int keyACount = 0;
-    bool dblTap = false;
+	bool dblTapD = false, dblTapA = false;
+	float cooldown = -1;
 	// Use this for initialization
 	void Start () {
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();       
@@ -20,41 +21,72 @@ public class PlayerMovementScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {       
-        int newPosition = 0;
 
-        if (Input.GetKeyDown(KeyCode.A) && positionQueue != 0){
-            newPosition = -1;            
+		int newPosition = 0;
+
+
+		if (cooldown != -1) {
+			if (cooldown > 0)
+				cooldown -= Time.deltaTime;
+			else {
+				if (dblTapA)
+					newPosition = -1;
+				else
+					newPosition = 1;
+
+					dblTapD = false;
+					dblTapA = false;
+					cooldown = -1;
+			}
+		}
+
+
+
+		if (Input.GetKeyDown (KeyCode.E) && positionQueue != 0) {
+			dblTapA = false;
+			dblTapD = false;
+			cooldown = 0;
+
+				}
+
+		else if (Input.GetKeyDown (KeyCode.Q) && positionQueue != 0) {
+			dblTapA = false;
+			dblTapD = false;
+			cooldown = 0;
+			
+		}
+
+        else if (Input.GetKeyDown(KeyCode.A) && positionQueue != 0){
+			dblTapD = false;
+			
+			if(dblTapA)
+			{
+				cooldown = -1;
+				newPosition = -2;
+				dblTapA = false;
+			}
+			else{
+				cooldown = dbltapCooldown;
+				dblTapA = true;   
+			}
         }
-        if (Input.GetKeyDown(KeyCode.D))
+
+        else if (Input.GetKeyDown(KeyCode.D))
         {
-            newPosition = 1;
+			dblTapA = false;
+
+            if (dblTapD)
+            {
+				cooldown = -1;
+                newPosition = 2;
+                dblTapD = false;
+
+            }
+            else{
+                dblTapD = true;
+				cooldown = dbltapCooldown;
+			}
         }
-
-
-    //    if (Input.GetKeyDown(KeyCode.D)) {
-    //        float cooldown = dbltapCooldown;
-    //        if (dblTap)
-    //        {
-    //            newPosition = 2;
-    //            dblTap = false;
-    //        }
-    //        else
-    //        {
-    //            dblTap = true;
-    //            do
-    //            {
-    //                if (Input.GetKey(KeyCode.D))
-    //                {
-    //                    newPosition = -1;
-
-    //                    break;
-    //                }
-    //                cooldown -= Time.deltaTime;
-    //            } while (cooldown > 0);
-    //            newPosition += 1;
-
-    //        }
-    //}
 
         //if (Input.GetKeyDown(KeyCode.D) && keyDCount == 0)
         //{
