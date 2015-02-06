@@ -13,7 +13,7 @@ public class PlatformMappingScript : MonoBehaviour {
             foreach (GameObject platform in GM.platformList){
                 /// Grabs the first platforms already in the game screen at the start of the game                
                 if (-6 <= platform.transform.position.x && platform.transform.position.x <= 6){
-                    platformQueue.Enqueue(platform);                   
+                    platformQueue.Enqueue(platform);
                 }
             }
         }

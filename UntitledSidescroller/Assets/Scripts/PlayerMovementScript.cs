@@ -154,6 +154,6 @@ public class PlayerMovementScript : MonoBehaviour {
 
     void FixedUpdate(){
         currentPlatform = GM.platformList[positionQueue];
-        transform.position = currentPlatform.transform.position + new Vector3(0f, .4f, 0f);
+        transform.position = currentPlatform.transform.position + new Vector3(.25f, 1.25f, 0f);
     }
 }

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlatformMovementScript : MonoBehaviour {
+public class CameraMovement : MonoBehaviour {
+
     // 1 - Designer variables
 
     /// <summary>
@@ -23,8 +24,7 @@ public class PlatformMovementScript : MonoBehaviour {
     PlatformMappingScript platMap;
 
     void Start()
-    {
-        platMap = GameObject.Find("PlatformMapper").GetComponent<PlatformMappingScript>();       
+    {        
     }
 
     void Update()
@@ -33,31 +33,11 @@ public class PlatformMovementScript : MonoBehaviour {
         movement = new Vector2(
           speed.x * direction.x,
           speed.y * direction.y);
-
-        //if (-6 <= transform.position.x && transform.position.x <= 6)
-        //{
-        //    platMap.Enqueue(this.gameObject);
-        //}
-
-        //if (transform.position.x < -6 || transform.position.x > 6)
-        //{
-        //    platMap.Dequeue(this.gameObject);
-        //}
     }
 
     void FixedUpdate()
     {
         // Apply movement to the rigidbody
         rigidbody2D.velocity = movement;
-    }
-
-    void OnBecameVisible()
-    {
-        platMap.Enqueue(this.gameObject);
-    }
-
-    void OnBecameInvisible()
-    {
-        platMap.Dequeue(this.gameObject);
     }
 }
