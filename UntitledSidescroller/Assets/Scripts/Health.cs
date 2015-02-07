@@ -4,10 +4,19 @@ using System.Collections;
 public class Health : MonoBehaviour {
 
     public int health;
-    public int color; 
+    public enum COLOR { BLANK, RED, GREEN, BLUE };
+    public COLOR color; 
+
+    public Sprite spriteBlank;
+    public Sprite spriteRed;
+    public Sprite spriteGreen;
+    public Sprite spriteBlue;
+
+    
+
 	// Use this for initialization
 	void Start () {
-	    
+        setColor(color);
 	}
 	
 	// Update is called once per frame
@@ -15,15 +24,18 @@ public class Health : MonoBehaviour {
 	
 	}
 
-    void setColor(int newColor)
+    void setColor(COLOR newColor)
     {
         switch (newColor)
         {
-            case 1:
+            case COLOR.RED:
+                this.GetComponent<SpriteRenderer>().sprite = spriteRed;
                 return;
-            case 2:
+            case COLOR.GREEN:
+                this.GetComponent<SpriteRenderer>().sprite = spriteGreen;
                 return;
-            case 3:
+            case COLOR.BLUE:
+                this.GetComponent<SpriteRenderer>().sprite = spriteBlue;
                 return;
             default:
                 return;
