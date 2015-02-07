@@ -4,8 +4,9 @@ using System.Collections;
 public class Health : MonoBehaviour {
 
     public int health;
+
     public enum COLOR { BLANK, RED, GREEN, BLUE };
-    public COLOR color; 
+    public COLOR initColor; 
 
     public Sprite spriteBlank;
     public Sprite spriteRed;
@@ -16,13 +17,20 @@ public class Health : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        setColor(color);
+        setColor(initColor);
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Update()
+    {
+        //setColor(COLOR.GREEN);
+        Debug.Log(health);
+        if (health <= 0) //constantly check if self should be dead
+        {
+            //setColor(COLOR.BLUE);
+            Destroy(this.gameObject);
+        }
+    }
 
     void setColor(COLOR newColor)
     {
@@ -38,8 +46,12 @@ public class Health : MonoBehaviour {
                 this.GetComponent<SpriteRenderer>().sprite = spriteBlue;
                 return;
             default:
-                return;
-                
+                return;   
         }
+    }
+
+    public void takeDamage(int dmg)
+    {
+        health -= dmg;
     }
 }

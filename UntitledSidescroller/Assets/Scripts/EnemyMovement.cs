@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.position = new Vector2(transform.position.x - speed, transform.position.y);
+        //this.GetComponent<Health>().takeDamage(5);
 	}
 
     void OnBecameInvisible()
