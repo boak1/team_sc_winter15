@@ -39,7 +39,7 @@ public class CameraMovement : MonoBehaviour {
     /// Gets moving direction in terms of an (x, y) direction
     /// LEFT = (-1,0) || RIGHT = (1,0) || UP = (0,1) || DOWN = (0,-1)
     /// </summary>     
-    Vector2 getDirection(Direction direction)
+    public Vector2 getDirection(Direction direction)
     {
         switch (direction)
         {

@@ -50,9 +50,9 @@
      <Compile Include="Assets\Scripts\EnemyMovement.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
-     <Compile Include="Assets\Scripts\PlatformMappingScript.cs" />
-     <Compile Include="Assets\Scripts\PlatformMovementScript.cs" />
-     <Compile Include="Assets\Scripts\PlayerMovementScript.cs" />
+     <Compile Include="Assets\Scripts\PlatformMapper.cs" />
+     <Compile Include="Assets\Scripts\PlatformMovement.cs" />
+     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\SfxPlayer.cs" />
      <Compile Include="Assets\Scripts\ShootingScript.cs" />
      <Compile Include="Assets\Scripts\TargetScript.cs" />
