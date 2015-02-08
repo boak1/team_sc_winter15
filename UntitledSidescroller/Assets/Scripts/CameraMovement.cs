@@ -1,43 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraMovement : MonoBehaviour {
-
-    // 1 - Designer variables
-
+public class CameraMovement : MonoBehaviour {  
     /// <summary>
-    /// Object speed
+    //  DESIGNER VARIABLES
+    /// :direction: Direction which the camera will move
+    /// :speed:     How fast the camera will move
     /// </summary>
+    public enum Direction { Left, Right, Up, Down };
+    public Direction direction;
     public Vector2 speed = new Vector2(0, 0);
 
+ 
     /// <summary>
-    /// Moving direction
-    /// (-1,0) to move LEFT || (1,0) to move RIGHT || (0,1) to move UP || (0,-1) to move DOWN
-    /// </summary>
-    public Vector2 direction = new Vector2(0, 0);
-
-
-    /// <summary>
-    /// Variables for programmers
+    //  PROGRAMMER VARIABLES
+    /// :movement: The speed and direction which the camera will move at
+    /// :v2dir:    The direction in terms of a Vector2 - see getDirection() 
     /// </summary>
     private Vector2 movement;
-    PlatformMappingScript platMap;
-
-    void Start()
-    {        
-    }
+    private Vector2 v2dir;    
 
     void Update()
     {
-        // 2 - Movement
+        /// Calculates the movement        
+        v2dir = getDirection(direction);
         movement = new Vector2(
-          speed.x * direction.x,
-          speed.y * direction.y);
+          speed.x * v2dir.x,
+          speed.y * v2dir.y);
     }
 
     void FixedUpdate()
     {
-        // Apply movement to the rigidbody
+        /// Applies movement to the rigidbody
         rigidbody2D.velocity = movement;
+    }
+
+    /// <summary>
+    /// Gets moving direction in terms of an (x, y) direction
+    /// LEFT = (-1,0) || RIGHT = (1,0) || UP = (0,1) || DOWN = (0,-1)
+    /// </summary>     
+    Vector2 getDirection(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Left:
+                return new Vector2(-1, 0);                
+            case Direction.Right:
+                return new Vector2(1, 0);                
+            case Direction.Up:
+                return new Vector2(0, 1);
+            case Direction.Down:
+                return new Vector2(0, -1);
+            default:
+                return new Vector2(0, 0);
+        }
     }
 }
