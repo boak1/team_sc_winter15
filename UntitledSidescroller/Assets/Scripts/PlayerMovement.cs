@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour {
             {
                 if (dblTapA)
                     newPosition = -1;
-                else
+                else if(dblTapD)
                     newPosition = 1;
 
                 dblTapD = false;
@@ -108,17 +108,20 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         positionIndex += newPosition;
+        if (positionIndex < 0) { positionIndex = 0; }
+        else if (positionIndex > platMap.platformList.Count - 1) { positionIndex = platMap.platformList.Count - 1; }
     }    
 
     void FixedUpdate()
     {
-        if (positionIndex < 0)
-        {
-            Application.LoadLevel("Game Over"); //set as a level in unity build settings
-        }
         currentPlatform = platMap.platformList[positionIndex];
         transform.position = currentPlatform.transform.position + new Vector3(.25f, 1.25f, 0f);
     }
+
+    //void OnBecameInvisible()
+    //{        
+    //    Application.LoadLevel("Game Over"); //set as a level in unity build settings        
+    //}
 }
 
 

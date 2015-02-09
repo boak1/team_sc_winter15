@@ -35,11 +35,18 @@ public class PlatformMapper : MonoBehaviour
     /// </summary>
     public void Add(GameObject platform)
     {
-        platformList.Add(platform);
+        if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Up)
+        {
+            PM.positionIndex += 1;
+        }
+        platformList.Add(platform);        
     }
     public void Remove(GameObject platform)
     {
-        PM.positionIndex -= 1;
+        if (CM.direction == CameraMovement.Direction.Right || CM.direction == CameraMovement.Direction.Down)
+        {
+            PM.positionIndex -= 1;
+        }
         platformList.Remove(platform);
     }
 
@@ -52,7 +59,7 @@ public class PlatformMapper : MonoBehaviour
     }
     private static int CompareY(GameObject object1, GameObject object2)
     {
-        return object1.transform.position.y.CompareTo(object2.transform.position.y);
+        return object2.transform.position.y.CompareTo(object1.transform.position.y);
     }
 }
 
