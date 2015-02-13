@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 /* Generic music player for levels. 
  * Things that aren't implemented yet:
@@ -19,37 +18,43 @@ public class BgmPlayer : MonoBehaviour {
     public float bgmTempo;
     public int numBeatsPerSegment;
     public float bgmStartDelayInSeconds = 0.0F;
-    // public List<GameObject> gameObjsWithAudioFlags = new List<GameObject>();
 
     private int index = 0;
+    private int flip = 0;
     private double nextEventTime;
     private AudioSource[] audioSources = new AudioSource[2];
+    private bool running = false;
 
 	// Use this for initialization
 	void Start () {
-        for (int i = 0; i < bgmClips.Length; i++)
+        for (int i = 0; i < 2; i++)
         {
             GameObject child = new GameObject("BgmPlayerChild");
             child.transform.parent = gameObject.transform;
             audioSources[i] = child.AddComponent("AudioSource") as AudioSource;
         }
-         
-        nextEventTime = AudioSettings.dspTime;
+        
+        nextEventTime = AudioSettings.dspTime + bgmStartDelayInSeconds;
+        running = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (!running)
+        {
+            return;
+        }
 
         	double time = AudioSettings.dspTime;
+
         if (time + 1.0F > nextEventTime)
         {
-            audioSources[index].clip = bgmClips[index];
-            audioSources[index].PlayScheduled(nextEventTime);
-            Debug.Log("Scheduled source " + index + " to start at time " + nextEventTime);
+            audioSources[flip].clip = bgmClips[index];
+            audioSources[flip].PlayScheduled(nextEventTime);
+            Debug.Log("Scheduled clip " + index + " to AudioSource " + flip + " at start at time " + nextEventTime);
             nextEventTime += 60.0F / bgmTempo * numBeatsPerSegment;
             index = 1;
+            flip = 1 - flip;
         }
 	}
-
-    
 }
