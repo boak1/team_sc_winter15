@@ -118,10 +118,10 @@ public class PlayerMovement : MonoBehaviour {
         transform.position = currentPlatform.transform.position + new Vector3(.25f, 1.25f, 0f);
     }
 
-    //void OnBecameInvisible()
-    //{        
-    //    Application.LoadLevel("Game Over"); //set as a level in unity build settings        
-    //}
+    void OnBecameInvisible()
+    {
+        Application.LoadLevel("Game Over"); //set as a level in unity build settings        
+    }
 }
 
 
