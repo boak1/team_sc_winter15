@@ -2,14 +2,26 @@
 using System.Collections;
 
 public class TargetScript : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public enum COLOR { BLANK, RED, GREEN, BLUE };
+    public COLOR initColor; 
+    ShootingScript SS;
+    void Start()
+    {
+        SS = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();
+    }
+    void OnBecameVisible()
+    {
+        switch (initColor)
+        {
+            case COLOR.RED:
+                SS.setRedTarget(this.gameObject);
+                break;
+            case COLOR.GREEN:
+                SS.setGreenTarget(this.gameObject);
+                break;
+            case COLOR.BLUE:
+                SS.setBlueTarget(this.gameObject);
+                break;
+        }
+    }
 }
