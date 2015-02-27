@@ -4,12 +4,14 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
     /// <summary>
     /// :platMap:         Import PlatformMapper as platMap to grab the platformList and the Add() and Remove() methods
+    /// :CM:              Import CameraMovement as CM to grab Camera's direction
     /// :positionIndex:   Index of the platformList that corresponds to the platform the PLAYER is currently on
     /// :currentPlatform: The gameObject representation of the current platform the PLAYER is on
     /// </summary>
     PlatformMapper platMap;
+    CameraMovement CM;
     public int positionIndex = 0;
-    GameObject currentPlatform;   
+    GameObject currentPlatform;
 
     /// <summary>
     //  DOUBLE TAP VARIABLES
@@ -24,15 +26,13 @@ public class PlayerMovement : MonoBehaviour {
     void Start()
     {
         platMap = GameObject.Find("PlatformMapper").GetComponent<PlatformMapper>();
+        CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();
         currentPlatform = platMap.platformList[positionIndex];
     }
 
     void Update()
     {
-
         int newPosition = 0;
-
-
         if (cooldown != -1)
         {
             if (cooldown > 0)
@@ -71,40 +71,63 @@ public class PlayerMovement : MonoBehaviour {
         }
 
 
-
-        else if (Input.GetKeyDown(KeyCode.A) && positionIndex != 0)
+        if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right)
         {
-            dblTapD = false;
-
-            if (dblTapA && positionIndex > 1)
+            if (Input.GetKeyDown(KeyCode.A) && positionIndex != 0)
             {
-                cooldown = -1;
-                newPosition = -2;
-                dblTapA = false;
-            }
-            else
-            {
-                cooldown = dbltapCooldown;
-                dblTapA = true;
-            }
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && positionIndex != platMap.platformList.Count - 1)
-        {
-            dblTapA = false;
-
-            if (dblTapD && positionIndex < platMap.platformList.Count - 2)
-            {
-                cooldown = -1;
-                newPosition = 2;
                 dblTapD = false;
 
+                if (dblTapA && positionIndex > 1)
+                {
+                    cooldown = -1; newPosition = -2; dblTapA = false;
+                }
+                else
+                {
+                    cooldown = dbltapCooldown; dblTapA = true;
+                }
             }
-            else
+            else if (Input.GetKeyDown(KeyCode.D) && positionIndex != platMap.platformList.Count - 1)
             {
-                dblTapD = true;
-                cooldown = dbltapCooldown;
+                dblTapA = false;
+
+                if (dblTapD && positionIndex < platMap.platformList.Count - 2)
+                {
+                    cooldown = -1; newPosition = 2; dblTapD = false;
+                }
+                else
+                {
+                    dblTapD = true; cooldown = dbltapCooldown;
+                }
+            }        
+        }
+        else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
+        {
+            if (Input.GetKeyDown(KeyCode.W) && positionIndex != 0)
+            {
+                dblTapD = false;
+
+                if (dblTapA && positionIndex > 1)
+                {
+                    cooldown = -1; newPosition = -2; dblTapA = false;
+                }
+                else
+                {
+                    cooldown = dbltapCooldown; dblTapA = true;
+                }
             }
+            else if (Input.GetKeyDown(KeyCode.S) && positionIndex != platMap.platformList.Count - 1)
+            {
+                dblTapA = false;
+
+                if (dblTapD && positionIndex < platMap.platformList.Count - 2)
+                {
+                    cooldown = -1; newPosition = 2; dblTapD = false;
+                }
+                else
+                {
+                    dblTapD = true; cooldown = dbltapCooldown;
+                }
+            }   
         }
 
         positionIndex += newPosition;
@@ -120,7 +143,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnBecameInvisible()
     {
-        Application.LoadLevel("Game Over"); //set as a level in unity build settings        
+        Application.LoadLevel("Game Over");
     }
 }
 

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class TargetScript : MonoBehaviour {
-    public enum COLOR { BLANK, RED, GREEN, BLUE };
+    public enum COLOR { BLANK, RED, GREEN, BLUE, INDESTRUCTIBLE };
     public COLOR initColor; 
     ShootingScript SS;
     void Start()
