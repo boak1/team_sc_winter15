@@ -8,6 +8,11 @@ public class GameManager : MonoBehaviour
     {
         Screen.SetResolution(800, 600, false);
     }
+
+    public static void gameOver()
+    {
+        Application.LoadLevel("Game Over");
+    }
 }
 
 

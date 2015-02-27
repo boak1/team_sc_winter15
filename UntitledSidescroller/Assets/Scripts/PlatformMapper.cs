@@ -30,7 +30,7 @@ public class PlatformMapper : MonoBehaviour
     ///                 - Functions will adjust the PLAYER's POSITIONINDEX accordingly when a platform inserts into or removes from the list
     /// </summary>
     public void Add(GameObject platform)
-    {
+    {       
         platformList.Add(platform);
         if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right)
             platformList.Sort(CompareX);
@@ -43,6 +43,8 @@ public class PlatformMapper : MonoBehaviour
     }
     public void Remove(GameObject platform)
     {
+        if (platformList[PM.positionIndex] == platform)
+            GameManager.gameOver();
         platformList.Remove(platform);
         if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right)
             platformList.Sort(CompareX);

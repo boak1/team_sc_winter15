@@ -4,12 +4,12 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
     /// <summary>
     /// :platMap:         Import PlatformMapper as platMap to grab the platformList and the Add() and Remove() methods
-    /// :CM:              Import CameraMovement as CM to grab Camera's direction
+    /// :CM:              Import CameraMovement as CM to grab Camera's direction    
     /// :positionIndex:   Index of the platformList that corresponds to the platform the PLAYER is currently on
     /// :currentPlatform: The gameObject representation of the current platform the PLAYER is on
     /// </summary>
     PlatformMapper platMap;
-    CameraMovement CM;
+    CameraMovement CM;    
     public int positionIndex = 0;
     GameObject currentPlatform;
 
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
     void Start()
     {
         platMap = GameObject.Find("PlatformMapper").GetComponent<PlatformMapper>();
-        CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();
+        CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();        
         currentPlatform = platMap.platformList[positionIndex];
     }
 
@@ -138,12 +138,12 @@ public class PlayerMovement : MonoBehaviour {
     void FixedUpdate()
     {
         currentPlatform = platMap.platformList[positionIndex];
-        transform.position = currentPlatform.transform.position + new Vector3(.25f, 1.25f, 0f);
+        transform.position = currentPlatform.transform.position + new Vector3(0f, .87f, 0f);
     }
 
     void OnBecameInvisible()
     {
-        Application.LoadLevel("Game Over");
+        GameManager.gameOver();
     }
 }
 
