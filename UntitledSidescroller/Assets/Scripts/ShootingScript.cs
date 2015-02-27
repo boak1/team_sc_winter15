@@ -1,27 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class ShootingScript : MonoBehaviour {
 
-    public GameObject redLaser;
-    public GameObject greenLaser; 
-	public GameObject blueLaser; 	
-	
+	public GameObject blueLaser; 
+	public GameObject greenLaser; 
+	public GameObject redLaser; 
 	public GameObject redTarget; 
 	public GameObject greenTarget; 
 	public GameObject blueTarget; 
-	//private GameObject beam;
-    private LineRenderer redLine;
-    private LineRenderer greenLine;
-    private LineRenderer blueLine;
+	private GameObject beam;    
 	// we need to draw a line from the players coridnents to the targets 
-    void Start()
-    {
-        redLine = redLaser.GetComponent<LineRenderer>();
-        greenLine = greenLaser.GetComponent<LineRenderer>();
-        blueLine = blueLaser.GetComponent<LineRenderer>();
-    }
+	
 	// Update is called once per frame
 	void Update () {
                
@@ -42,25 +32,6 @@ public class ShootingScript : MonoBehaviour {
         }
 	}
 
-    void FixedUpdate()
-    {        
-        if (redTarget != null)
-        {
-            redLine.SetPosition(0, this.transform.position);
-            redLine.SetPosition(1, redTarget.transform.position);
-        }
-        if (greenTarget != null)
-        {
-            greenLine.SetPosition(0, this.transform.position);
-            greenLine.SetPosition(1, greenTarget.transform.position);
-        }
-        if (blueTarget != null)
-        {
-            blueLine.SetPosition(0, this.transform.position);
-            blueLine.SetPosition(1, blueTarget.transform.position);
-        }
-    }
-
     public void setRedTarget(GameObject target)
     {
         redTarget = target;
@@ -80,12 +51,12 @@ public class ShootingScript : MonoBehaviour {
     /// Shoots in the direction of the target and kills the first enemy it hits.
     /// </summary>    
     void aimAt(GameObject target)
-    {        
+    {
         RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, target.transform.position - this.transform.position);
         if (hits.Length > 0)
         {
             if (hits[0].collider.CompareTag("Enemy"))
-            {                
+            {
                 Destroy(hits[0].collider.gameObject);
             }
         }
