@@ -3,64 +3,119 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ShootingScript : MonoBehaviour {
-
+    ///Holders for the LineRenderer GameObjects
     public GameObject redLaser;
     public GameObject greenLaser; 
 	public GameObject blueLaser; 	
-	
-	public GameObject redTarget; 
-	public GameObject greenTarget; 
-	public GameObject blueTarget; 
-	//private GameObject beam;
+    ///Holders for the actual LineRender components of each
     private LineRenderer redLine;
     private LineRenderer greenLine;
-    private LineRenderer blueLine;
-	// we need to draw a line from the players coridnents to the targets 
+    private LineRenderer blueLine;	
+	
+    ///Holders for the red, green, blue enemies/objects that are on the screen.  These get assigned through the public setter methods below
+	public GameObject redTarget; 
+	public GameObject greenTarget; 
+	public GameObject blueTarget;
+    
     void Start()
     {
+        ///Link the components of each lineRender for easier use.
         redLine = redLaser.GetComponent<LineRenderer>();
         greenLine = greenLaser.GetComponent<LineRenderer>();
         blueLine = blueLaser.GetComponent<LineRenderer>();
     }
-	// Update is called once per frame
+	
 	void Update () {
-               
+        ///If player shoots, aim and shoot at that target.  Will stop after the first collider it hits.
         if (Input.GetKeyUp(KeyCode.J) && redTarget != null)
         {
-            aimAt(redTarget);
-            Debug.DrawLine(this.transform.position, redTarget.transform.position, Color.red, 2, false);
+            aimAt(redTarget);           
         }
         else if (Input.GetKeyUp(KeyCode.K) && greenTarget != null)
         {
-            aimAt(greenTarget);
-            Debug.DrawLine(this.transform.position, greenTarget.transform.position, Color.green, 2, false);            
+            aimAt(greenTarget);            
         }
         else if (Input.GetKeyUp(KeyCode.L) && blueTarget != null)
         {
-            aimAt(blueTarget);
-            Debug.DrawLine(this.transform.position, blueTarget.transform.position, Color.blue, 2, false);           
+            aimAt(blueTarget);            
         }
 	}
 
     void FixedUpdate()
-    {        
+    {
+        drawPredictionLines();
+    }
+
+    /// <summary>
+    /// :param:target: parameter for the target to aim at
+    /// Shoots in the direction of the target and kills the first enemy it hits.
+    /// </summary>    
+    void aimAt(GameObject target)
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, target.transform.position - this.transform.position);
+        if (hits.Length > 0)
+        {
+            if (hits[0].collider.CompareTag("Enemy"))
+            {
+                Destroy(hits[0].collider.gameObject);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Function which draws al three prediction lines
+    /// </summary>
+    void drawPredictionLines()
+    {
+        ///Draws a prediction line to the redTarget holder if there is one.  Else: sets the beginning vertex and end vertex to both the
+        ///Front of the player's gun.
         if (redTarget != null)
         {
             redLine.SetPosition(0, this.transform.position);
             redLine.SetPosition(1, redTarget.transform.position);
         }
+        else
+        {
+            redLine.SetPosition(0, this.transform.position);
+            redLine.SetPosition(1, this.transform.position);
+        }
+
+        ///Draws the prediction line for the greenTarget if there is one.  Else: sets the beginning vertex and end vertex to both the
+        ///Front of the player's gun.
         if (greenTarget != null)
         {
             greenLine.SetPosition(0, this.transform.position);
             greenLine.SetPosition(1, greenTarget.transform.position);
         }
+        else
+        {
+            greenLine.SetPosition(0, this.transform.position);
+            greenLine.SetPosition(1, this.transform.position);
+        }
+
+        ///Draws the prediction line for the redTarget if there is one.  Else: sets the beginning vertex and end vertex to both the
+        ///Front of the player's gun.
         if (blueTarget != null)
         {
             blueLine.SetPosition(0, this.transform.position);
             blueLine.SetPosition(1, blueTarget.transform.position);
         }
+        else
+        {
+            blueLine.SetPosition(0, this.transform.position);
+            blueLine.SetPosition(1, this.transform.position);
+        }
     }
 
+
+
+
+
+
+    /// <summary>
+    /// :setRedTarget & setGreenTarget & setBlueTarget: Setters will be called by the targetScript (that is attached to every enemy)
+    ///                                                 when they enter the screen, to link themselves with this scripts target holders
+    /// </summary>    
     public void setRedTarget(GameObject target)
     {
         redTarget = target;
@@ -69,32 +124,16 @@ public class ShootingScript : MonoBehaviour {
     {
         greenTarget = target;
     }
-    
     public void setBlueTarget(GameObject target)
     {
         blueTarget = target;
-    }
-
-    /// <summary>
-    /// :param:target - parameter for the target to aim at
-    /// Shoots in the direction of the target and kills the first enemy it hits.
-    /// </summary>    
-    void aimAt(GameObject target)
-    {        
-        RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, target.transform.position - this.transform.position);
-        if (hits.Length > 0)
-        {
-            if (hits[0].collider.CompareTag("Enemy"))
-            {                
-                Destroy(hits[0].collider.gameObject);
-            }
-        }
-    }
+    }    
 }
 
 
 
 ///Unused atm
+//private GameObject beam;
 //if (Input.GetKeyDown(KeyCode.J)) 
 //{
 //    if (beam == null){
