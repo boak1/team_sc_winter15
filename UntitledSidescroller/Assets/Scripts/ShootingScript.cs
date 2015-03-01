@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class ShootingScript : MonoBehaviour {
     ///Holders for the LineRenderer GameObjects
-    public GameObject redLaser;
-    public GameObject greenLaser; 
-	public GameObject blueLaser; 	
+    private LineRenderer redLaserLine;
+    private LineRenderer greenLaserLine;
+    private LineRenderer blueLaserLine;
     ///Holders for the actual LineRender components of each
-    private LineRenderer redLine;
-    private LineRenderer greenLine;
-    private LineRenderer blueLine;	
+    private LineRenderer redPredictionLine;
+    private LineRenderer greenPredictionLine;
+    private LineRenderer bluePredictionLine;	
 	
     ///Holders for the red, green, blue enemies/objects that are on the screen.  These get assigned through the public setter methods below
 	public GameObject redTarget; 
@@ -20,41 +20,55 @@ public class ShootingScript : MonoBehaviour {
     void Start()
     {
         ///Link the components of each lineRender for easier use.
-        redLine = redLaser.GetComponent<LineRenderer>();
-        greenLine = greenLaser.GetComponent<LineRenderer>();
-        blueLine = blueLaser.GetComponent<LineRenderer>();
+        redPredictionLine = GameObject.Find("Player/PlayerShooting/RedPredictionLineRenderer").GetComponent<LineRenderer>();
+        greenPredictionLine = GameObject.Find("Player/PlayerShooting/GreenPredictionLineRenderer").GetComponent<LineRenderer>();
+        bluePredictionLine = GameObject.Find("Player/PlayerShooting/BluePredictionLineRenderer").GetComponent<LineRenderer>();
+
+        redLaserLine = GameObject.Find("Player/PlayerShooting/RedLaserLineRenderer").GetComponent<LineRenderer>();
+        greenLaserLine = GameObject.Find("Player/PlayerShooting/GreenLaserLineRenderer").GetComponent<LineRenderer>();
+        blueLaserLine = GameObject.Find("Player/PlayerShooting/BlueLaserLineRenderer").GetComponent<LineRenderer>();
     }
 	
 	void Update () {
         ///If player shoots, aim and shoot at that target.  Will stop after the first collider it hits.
-        if (Input.GetKeyUp(KeyCode.J) && redTarget != null)
+        if (Input.GetKeyDown(KeyCode.J) && redTarget != null)
         {
-            aimAt(redTarget);           
+            shootAt(redTarget);           
         }
-        else if (Input.GetKeyUp(KeyCode.K) && greenTarget != null)
+        else if (Input.GetKeyDown(KeyCode.K) && greenTarget != null)
         {
-            aimAt(greenTarget);            
+            shootAt(greenTarget);            
         }
-        else if (Input.GetKeyUp(KeyCode.L) && blueTarget != null)
+        else if (Input.GetKeyDown(KeyCode.L) && blueTarget != null)
         {
-            aimAt(blueTarget);            
+            shootAt(blueTarget);            
         }
 	}
 
     void FixedUpdate()
     {
         drawPredictionLines();
+        redLaserLine.SetPosition(0, this.transform.position);
+        redLaserLine.SetPosition(1, this.transform.position);
+        greenLaserLine.SetPosition(0, this.transform.position);
+        greenLaserLine.SetPosition(1, this.transform.position);
+        blueLaserLine.SetPosition(0, this.transform.position);
+        blueLaserLine.SetPosition(1, this.transform.position);
     }
 
     /// <summary>
     /// :param:target: parameter for the target to aim at
     /// Shoots in the direction of the target and kills the first enemy it hits.
     /// </summary>    
-    void aimAt(GameObject target)
+    void shootAt(GameObject target)
     {
+        Dictionary<GameObject, LineRenderer> lineDict = new Dictionary<GameObject, LineRenderer>() {
+            {redTarget, redLaserLine},{greenTarget, greenLaserLine},{blueTarget, blueLaserLine}};
         RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, target.transform.position - this.transform.position);
         if (hits.Length > 0)
         {
+            lineDict[target].SetPosition(0, this.transform.position);
+            lineDict[target].SetPosition(1, hits[0].transform.position);
             if (hits[0].collider.CompareTag("Enemy"))
             {
                 Destroy(hits[0].collider.gameObject);
@@ -63,7 +77,7 @@ public class ShootingScript : MonoBehaviour {
     }
 
     /// <summary>
-    /// Function which draws al three prediction lines
+    /// Function which draws all three prediction lines
     /// </summary>
     void drawPredictionLines()
     {
@@ -71,39 +85,39 @@ public class ShootingScript : MonoBehaviour {
         ///Front of the player's gun.
         if (redTarget != null)
         {
-            redLine.SetPosition(0, this.transform.position);
-            redLine.SetPosition(1, redTarget.transform.position);
+            redPredictionLine.SetPosition(0, this.transform.position);
+            redPredictionLine.SetPosition(1, redTarget.transform.position);
         }
         else
         {
-            redLine.SetPosition(0, this.transform.position);
-            redLine.SetPosition(1, this.transform.position);
+            redPredictionLine.SetPosition(0, this.transform.position);
+            redPredictionLine.SetPosition(1, this.transform.position);
         }
 
         ///Draws the prediction line for the greenTarget if there is one.  Else: sets the beginning vertex and end vertex to both the
         ///Front of the player's gun.
         if (greenTarget != null)
         {
-            greenLine.SetPosition(0, this.transform.position);
-            greenLine.SetPosition(1, greenTarget.transform.position);
+            greenPredictionLine.SetPosition(0, this.transform.position);
+            greenPredictionLine.SetPosition(1, greenTarget.transform.position);
         }
         else
         {
-            greenLine.SetPosition(0, this.transform.position);
-            greenLine.SetPosition(1, this.transform.position);
+            greenPredictionLine.SetPosition(0, this.transform.position);
+            greenPredictionLine.SetPosition(1, this.transform.position);
         }
 
         ///Draws the prediction line for the redTarget if there is one.  Else: sets the beginning vertex and end vertex to both the
         ///Front of the player's gun.
         if (blueTarget != null)
         {
-            blueLine.SetPosition(0, this.transform.position);
-            blueLine.SetPosition(1, blueTarget.transform.position);
+            bluePredictionLine.SetPosition(0, this.transform.position);
+            bluePredictionLine.SetPosition(1, blueTarget.transform.position);
         }
         else
         {
-            blueLine.SetPosition(0, this.transform.position);
-            blueLine.SetPosition(1, this.transform.position);
+            bluePredictionLine.SetPosition(0, this.transform.position);
+            bluePredictionLine.SetPosition(1, this.transform.position);
         }
     }
 
