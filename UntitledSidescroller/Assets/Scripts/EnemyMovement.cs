@@ -6,11 +6,12 @@ using System;
 public class EnemyMovement : MonoBehaviour {
 
 	public bool homing;
-	public GameObject pm;
+	GameObject pm;
 
     public float speed;
 	// Use this for initialization
 	void Start () {
+		pm = GameObject.Find("Player");
 	}
 	
 	// Update is called once per frame
