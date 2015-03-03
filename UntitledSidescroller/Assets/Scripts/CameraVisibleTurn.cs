@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraTurn : MonoBehaviour {
+public class CameraVisibleTurn : MonoBehaviour {
     CameraMovement CM;
     public CameraMovement.Direction newDirection;
 
