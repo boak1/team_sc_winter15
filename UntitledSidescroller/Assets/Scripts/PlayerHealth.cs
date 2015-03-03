@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int hp = 3;
+    public static int hp = 3;
     //get the hp sprites
     public Sprite fullHp;
     public Sprite oneHP;

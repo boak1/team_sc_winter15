@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TargetScript : MonoBehaviour {
+public class EnemyPreferences : MonoBehaviour {
     /// <summary>
     /// This script should be added to any enemy to house certain attributes.
     /// This script will associate a COLOR to each enemy and link it with the ShootingScript accordingly.
@@ -15,7 +15,7 @@ public class TargetScript : MonoBehaviour {
     /// </summary>
     public enum COLOR { BLANK, RED, GREEN, BLUE, INDESTRUCTIBLE };
     public COLOR initColor; 
-    ShootingScript SS;
+    ShootingScript SS;    
     void Start()
     {
         SS = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();  //Import ShootingScript
@@ -35,6 +35,15 @@ public class TargetScript : MonoBehaviour {
             case COLOR.BLUE:
                 SS.setBlueTarget(this.gameObject);
                 break;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D hit)
+    {
+        if (hit.gameObject.name == "Player")
+        {
+            PlayerHealth.hp -= 1;
+            Destroy(this.gameObject);
         }
     }
 }
