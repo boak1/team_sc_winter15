@@ -19,10 +19,6 @@ public class EnemyMovement : MonoBehaviour {
 		if (homing) {
 			float movex = pm.transform.position.x - transform.position.x;
 			float movey = pm.transform.position.y - transform.position.y;
-			if(Math.Abs(movex)==.02f)
-				movex = 0f;
-			if(Math.Abs(movey)==.02f)
-				movey = 0f;
 
 			transform.position = new Vector2 (transform.position.x + (movex/Math.Abs(movex)) * .02f, transform.position.y + (movey/Math.Abs(movey))*.02f);
 		}
