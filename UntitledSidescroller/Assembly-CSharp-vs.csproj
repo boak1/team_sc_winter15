@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\SfxPlayer.cs" />
      <Compile Include="Assets\Scripts\ShootingScript.cs" />
+     <Compile Include="Assets\Scripts\ShootingTutorial.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/UnityEngine.UI.dll</HintPath>
  </Reference>

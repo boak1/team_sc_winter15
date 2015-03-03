@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraVisibleTurn : MonoBehaviour {
     CameraMovement CM;
     public CameraMovement.Direction newDirection;
+    public Vector2 newSpeed = new Vector2(0, 0);
 
     void Start()
     {
@@ -13,5 +14,6 @@ public class CameraVisibleTurn : MonoBehaviour {
     void OnBecameVisible()
     {
         CM.direction = newDirection;
+        CM.speed = newSpeed;
     }
 }
