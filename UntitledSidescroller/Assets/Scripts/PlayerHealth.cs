@@ -33,8 +33,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else if (hpTest == 0)
         {
-            Application.LoadLevel("Game Over"); //moves to game over screen
-
+            GameManager.gameOver();
         }
     }
 }

@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\EnemyHomingMovement.cs" />
      <Compile Include="Assets\Scripts\EnemyPreferences.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\GameWin.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
      <Compile Include="Assets\Scripts\PlatformMapper.cs" />
      <Compile Include="Assets\Scripts\PlatformMovement.cs" />

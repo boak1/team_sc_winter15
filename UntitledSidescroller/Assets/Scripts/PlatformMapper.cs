@@ -44,7 +44,9 @@ public class PlatformMapper : MonoBehaviour
     public void Remove(GameObject platform)
     {
         if (platformList[PM.positionIndex] == platform)
+        {            
             GameManager.gameOver();
+        }
         platformList.Remove(platform);
         if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right)
             platformList.Sort(CompareX);

@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
 
     public static void gameOver()
     {
-        Application.LoadLevel("Game Over");
+        if (!GameWin.visible)
+            Application.LoadLevel("Game Over");        
     }
 }
 
