@@ -50,7 +50,7 @@
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CameraPlayerTrigger.cs" />
      <Compile Include="Assets\Scripts\CameraVisibleTurn.cs" />
-     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+     <Compile Include="Assets\Scripts\EnemyHomingMovement.cs" />
      <Compile Include="Assets\Scripts\EnemyPreferences.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
