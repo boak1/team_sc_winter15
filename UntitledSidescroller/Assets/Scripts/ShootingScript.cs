@@ -62,8 +62,10 @@ public class ShootingScript : MonoBehaviour {
     /// </summary>    
     void shootAt(GameObject target)
     {
-        Dictionary<GameObject, LineRenderer> lineDict = new Dictionary<GameObject, LineRenderer>() {
-            {redTarget, redLaserLine},{greenTarget, greenLaserLine},{blueTarget, blueLaserLine}};
+        Dictionary<GameObject, LineRenderer> lineDict = new Dictionary<GameObject, LineRenderer>();
+        if (redTarget!=null) lineDict.Add(redTarget, redLaserLine);
+        if (greenTarget!=null) lineDict.Add(greenTarget, greenLaserLine);
+        if (blueTarget!=null) lineDict.Add(blueTarget, blueLaserLine);       
         RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, target.transform.position - this.transform.position);
         if (hits.Length > 0)
         {
