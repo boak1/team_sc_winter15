@@ -5,9 +5,11 @@ using System;
 
 public class EnemyHomingMovement : MonoBehaviour {
 
-	private bool homing;
+	private bool homing, visible;
 	GameObject pm;
-    public Vector2 bound = new Vector2(5, 5);    
+    public Vector2 boundstart = new Vector2(5, 5); 
+	public Vector2 boundend = new Vector2(5, 5);    
+
     private Vector2 startPos;
 	// Use this for initialization
 	void Start () {
@@ -17,13 +19,13 @@ public class EnemyHomingMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (pm.transform.position.x > startPos.x - bound.x && pm.transform.position.x < startPos.x + bound.x &&
-            pm.transform.position.y > startPos.y - bound.y && pm.transform.position.y < startPos.y + bound.y)
+        if (pm.transform.position.x > startPos.x - boundstart.x && pm.transform.position.x < startPos.x + boundend.x &&
+            pm.transform.position.y > startPos.y - boundend.y && pm.transform.position.y < startPos.y + boundstart.y)
             homing = true;
         else
             homing = false;
 
-		if (homing) {
+		if (homing && visible) {
 			float movex = pm.transform.position.x - transform.position.x;
 			float movey = pm.transform.position.y - transform.position.y;
 
@@ -35,4 +37,9 @@ public class EnemyHomingMovement : MonoBehaviour {
     {   //are they staying on screen?
         Destroy(this.gameObject);
     }
+
+	void OnBecameVisible()
+	{   //is the gameobject on screen?
+		visible = true;
+	}
 }
