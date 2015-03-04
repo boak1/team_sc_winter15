@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour {
     CameraMovement CM;    
     public int positionIndex = 0;
     GameObject currentPlatform;
+    private float old_x;
+    private Vector3 player_scale;
 
     /// <summary>
     //  DOUBLE TAP VARIABLES
@@ -25,13 +27,14 @@ public class PlayerMovement : MonoBehaviour {
 
     void Start()
     {
+        player_scale = this.transform.localScale;
         platMap = GameObject.Find("PlatformMapper").GetComponent<PlatformMapper>();
         CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();        
-        currentPlatform = platMap.platformList[positionIndex];
+        currentPlatform = platMap.platformList[positionIndex];        
     }
 
     void Update()
-    {
+    {        
         int newPosition = 0;
         if (cooldown != -1)
         {
@@ -137,8 +140,17 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
+        old_x = this.transform.position.x;
         currentPlatform = platMap.platformList[positionIndex];
         transform.position = currentPlatform.transform.position + new Vector3(0f, .87f, 0f);
+        if (this.transform.position.x < old_x)
+        {                     
+            this.transform.localScale = new Vector3(-player_scale.x, player_scale.y, player_scale.z);
+        }
+        else if (this.transform.position.x > old_x)
+        {            
+            this.transform.localScale = new Vector3(player_scale.x, player_scale.y, player_scale.z);
+        }
     }
 
     void OnBecameInvisible()
