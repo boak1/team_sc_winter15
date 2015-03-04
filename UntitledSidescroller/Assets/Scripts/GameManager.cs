@@ -14,6 +14,14 @@ public class GameManager : MonoBehaviour
         if (!GameWin.visible)
             Application.LoadLevel("Game Over");        
     }
+
+    void OnLevelWasLoaded(int level)
+    {
+        if (level == 0)
+        {
+            PlayerHealth.hp = 3;            
+        }
+    }
 }
 
 
