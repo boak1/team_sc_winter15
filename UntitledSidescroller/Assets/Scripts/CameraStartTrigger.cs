@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraPlayerTrigger : MonoBehaviour {
+public class CameraStartTrigger : MonoBehaviour {
     CameraMovement CM;
     public CameraMovement.Direction newDirection;
     public Vector2 newSpeed = new Vector2(0,0);
@@ -21,6 +21,8 @@ public class CameraPlayerTrigger : MonoBehaviour {
         {            
             CM.direction = newDirection;
             CM.speed = newSpeed;
+            PlayerPrefs.SetInt("CheckpointCounter",0);
+            PlayerPrefs.SetInt("CurrentLevel", Application.loadedLevel);
         }
     }
 }
