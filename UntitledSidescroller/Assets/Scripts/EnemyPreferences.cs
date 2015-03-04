@@ -15,6 +15,7 @@ public class EnemyPreferences : MonoBehaviour {
     /// </summary>
     public enum COLOR { BLANK, RED, GREEN, BLUE, INDESTRUCTIBLE };
     public COLOR initColor; 
+	public bool killOffScreen = true;
     ShootingScript SS;    
     void Start()
     {
@@ -46,4 +47,10 @@ public class EnemyPreferences : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
+
+	void OnBecameInvisible()
+	{
+		if(killOffScreen)
+		Destroy (this.gameObject);
+	}
 }

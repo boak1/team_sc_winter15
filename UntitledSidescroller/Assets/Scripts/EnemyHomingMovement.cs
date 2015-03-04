@@ -33,10 +33,7 @@ public class EnemyHomingMovement : MonoBehaviour {
 		}		        
 	}
 
-    void OnBecameInvisible()
-    {   //are they staying on screen?
-        Destroy(this.gameObject);
-    }
+
 
 	void OnBecameVisible()
 	{   //is the gameobject on screen?

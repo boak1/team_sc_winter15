@@ -66,8 +66,5 @@ public class EnemyStandardMovement : MonoBehaviour {
         active = true;
     }
 
-    void OnBecameInvisible()
-    {
-        Destroy(this.gameObject);
-    }
+
 }
