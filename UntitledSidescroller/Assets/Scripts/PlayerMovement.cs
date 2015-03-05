@@ -21,9 +21,9 @@ public class PlayerMovement : MonoBehaviour {
     /// :dblTapD & dblTapA: FOR BILLY TO EXPLAIN
     /// :cooldown:          FOR BILLY TO EXPLAIN
     /// </summary>
-    //float dbltapCooldown = .155f;
-    //bool dblTapD = false, dblTapA = false;
-    //float cooldown = -1;
+    float dbltapCooldown = .155f;
+    bool dblTapD = false, dblTapA = false;
+    float cooldown = -1;
 
 	/// <summary>
 	/// Sfx player and stuff
@@ -44,29 +44,29 @@ public class PlayerMovement : MonoBehaviour {
     void Update()
     {        
         int newPosition = 0;
-        //if (cooldown != -1)
-        //{
-        //    if (cooldown > 0)
-        //        cooldown -= Time.deltaTime;
-        //    else
-        //    {
-        //        if (dblTapA)
-        //            newPosition = -1;
-        //        else if(dblTapD)
-        //            newPosition = 1;
+        if (cooldown != -1)
+        {
+            if (cooldown > 0)
+                cooldown -= Time.deltaTime;
+            else
+            {
+                if (dblTapA)
+                    newPosition = -1;
+                else if(dblTapD)
+                    newPosition = 1;
 
-        //        dblTapD = false;
-        //        dblTapA = false;
-        //        cooldown = -1;
-        //    }
-        //}
+                dblTapD = false;
+                dblTapA = false;
+                cooldown = -1;
+            }
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            //dblTapA = false;
-            //dblTapD = false;
-            //cooldown = -1;
+            dblTapA = false;
+            dblTapD = false;
+            cooldown = -1;
 
             positionIndex = 0;
         }
@@ -74,9 +74,9 @@ public class PlayerMovement : MonoBehaviour {
 
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            //dblTapA = false;
-            //dblTapD = false;
-            //cooldown = -1;
+            dblTapA = false;
+            dblTapD = false;
+            cooldown = -1;
 
             positionIndex = platMap.platformList.Count - 1;
         }
@@ -84,90 +84,83 @@ public class PlayerMovement : MonoBehaviour {
 
         if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right)
         {
-            if (Input.GetKeyDown(KeyCode.A) && positionIndex > 0)
+            if (Input.GetKeyDown(KeyCode.A) && positionIndex != 0)
             {
-                //dblTapD = false;
+                dblTapD = false;
 
 				//play teleport sound effect
 				sfxPlayer.PlaySfx("teleport");
+				Debug.Log(sfxPlayer == null);
 
-                //if (dblTapA && positionIndex > 1)
-                //{
-                //    cooldown = -1; 
-                newPosition = -1; 
-                //dblTapA = false;
-                //}
-                //else
-                //{
-                    //cooldown = dbltapCooldown; dblTapA = true;
-                //}
+                if (dblTapA && positionIndex > 1)
+                {
+                    cooldown = -1; newPosition = -2; dblTapA = false;
+                }
+                else
+                {
+                    cooldown = dbltapCooldown; dblTapA = true;
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.D) && positionIndex < platMap.platformList.Count - 1)
+            else if (Input.GetKeyDown(KeyCode.D) && positionIndex != platMap.platformList.Count - 1)
             {
-                //dblTapA = false;
+                dblTapA = false;
 
 				//play teleport sound effect
 				sfxPlayer.PlaySfx("teleport");
 
-                //if (dblTapD && positionIndex < platMap.platformList.Count - 2)
-                //{
-                //    cooldown = -1; 
-                newPosition = 1;
-                //dblTapD = false;
-                //}
-                //else
-                //{
-                //    dblTapD = true; cooldown = dbltapCooldown;
-                //}
+                if (dblTapD && positionIndex < platMap.platformList.Count - 2)
+                {
+                    cooldown = -1; newPosition = 2; dblTapD = false;
+                }
+                else
+                {
+                    dblTapD = true; cooldown = dbltapCooldown;
+                }
             }        
         }
         else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
         {
-            if (Input.GetKeyDown(KeyCode.W) && positionIndex > 0)
+            if (Input.GetKeyDown(KeyCode.W) && positionIndex != 0)
             {
-                //dblTapD = false;
+                dblTapD = false;
 
 				// play teleport sound effect
 				sfxPlayer.PlaySfx("teleport");
 
-                //if (dblTapA && positionIndex > 1)
-                //{
-                //    cooldown = -1; 
-                newPosition = -1; 
-                //dblTapA = false;
-                //}
-                //else
-                //{
-                //    cooldown = dbltapCooldown; dblTapA = true;
-                //}
+                if (dblTapA && positionIndex > 1)
+                {
+                    cooldown = -1; newPosition = -2; dblTapA = false;
+                }
+                else
+                {
+                    cooldown = dbltapCooldown; dblTapA = true;
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.S) && positionIndex < platMap.platformList.Count - 1)
+            else if (Input.GetKeyDown(KeyCode.S) && positionIndex != platMap.platformList.Count - 1)
             {
-                //dblTapA = false;
+                dblTapA = false;
 
 				//play teleport sound effect
 				sfxPlayer.PlaySfx("teleport");
 
-                //if (dblTapD && positionIndex < platMap.platformList.Count - 2)
-                //{
-                //    cooldown = -1; 
-                newPosition = 1; 
-                //dblTapD = false;
-                //}
-                //else
-                //{
-                //    dblTapD = true; cooldown = dbltapCooldown;
-                //}
+                if (dblTapD && positionIndex < platMap.platformList.Count - 2)
+                {
+                    cooldown = -1; newPosition = 2; dblTapD = false;
+                }
+                else
+                {
+                    dblTapD = true; cooldown = dbltapCooldown;
+                }
             }   
         }
 
-        positionIndex += newPosition;        
-        //if (positionIndex < 0) { positionIndex = 0; }
-        //else if (positionIndex > platMap.platformList.Count - 1) { positionIndex = platMap.platformList.Count - 1; }
+        positionIndex += newPosition;
+        if (positionIndex < 0) { positionIndex = 0; }
+        else if (positionIndex > platMap.platformList.Count - 1) { positionIndex = platMap.platformList.Count - 1; }
     }    
 
     void FixedUpdate()
-    {        
+    {
         old_x = this.transform.position.x;
         currentPlatform = platMap.platformList[positionIndex];
         transform.position = currentPlatform.transform.position + new Vector3(0f, .87f, 0f);

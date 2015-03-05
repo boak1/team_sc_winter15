@@ -75,7 +75,8 @@ public class ShootingScript : MonoBehaviour {
         if (blueTarget!=null) lineDict.Add(blueTarget, blueLaserLine);       
         RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, target.transform.position - this.transform.position);
         if (hits.Length > 0)
-        {            
+        {
+            Debug.Log(hits[0].collider.name);
             lineDict[target].SetPosition(0, this.transform.position);
             lineDict[target].SetPosition(1, hits[0].transform.position);
             if (hits[0].collider.CompareTag("Enemy"))
