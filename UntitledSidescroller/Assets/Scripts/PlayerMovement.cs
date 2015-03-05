@@ -25,12 +25,20 @@ public class PlayerMovement : MonoBehaviour {
     bool dblTapD = false, dblTapA = false;
     float cooldown = -1;
 
+	/// <summary>
+	/// Sfx player and stuff
+	/// </summary>
+	public SfxPlayer sfxPlayer;
+
     void Start()
     {
         player_scale = this.transform.localScale;
         platMap = GameObject.Find("PlatformMapper").GetComponent<PlatformMapper>();
         CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();        
-        currentPlatform = platMap.platformList[positionIndex];        
+        currentPlatform = platMap.platformList[positionIndex];       
+
+		//sfxPlayer = GameObject.Find("Player").GetComponent<SfxPlayer>();
+		//sfxPlayer = GetComponentInParent<SfxPlayer> ();
     }
 
     void Update()
@@ -80,6 +88,10 @@ public class PlayerMovement : MonoBehaviour {
             {
                 dblTapD = false;
 
+				//play teleport sound effect
+				sfxPlayer.PlaySfx("teleport");
+				Debug.Log(sfxPlayer == null);
+
                 if (dblTapA && positionIndex > 1)
                 {
                     cooldown = -1; newPosition = -2; dblTapA = false;
@@ -92,6 +104,9 @@ public class PlayerMovement : MonoBehaviour {
             else if (Input.GetKeyDown(KeyCode.D) && positionIndex != platMap.platformList.Count - 1)
             {
                 dblTapA = false;
+
+				//play teleport sound effect
+				sfxPlayer.PlaySfx("teleport");
 
                 if (dblTapD && positionIndex < platMap.platformList.Count - 2)
                 {
@@ -109,6 +124,9 @@ public class PlayerMovement : MonoBehaviour {
             {
                 dblTapD = false;
 
+				// play teleport sound effect
+				sfxPlayer.PlaySfx("teleport");
+
                 if (dblTapA && positionIndex > 1)
                 {
                     cooldown = -1; newPosition = -2; dblTapA = false;
@@ -121,6 +139,9 @@ public class PlayerMovement : MonoBehaviour {
             else if (Input.GetKeyDown(KeyCode.S) && positionIndex != platMap.platformList.Count - 1)
             {
                 dblTapA = false;
+
+				//play teleport sound effect
+				sfxPlayer.PlaySfx("teleport");
 
                 if (dblTapD && positionIndex < platMap.platformList.Count - 2)
                 {

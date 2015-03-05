@@ -16,6 +16,9 @@ public class ShootingScript : MonoBehaviour {
 	public GameObject redTarget; 
 	public GameObject greenTarget; 
 	public GameObject blueTarget;
+
+	/// Sound effects player (uses the global player)
+	public SfxPlayer sfxPlayer;
     
     void Start()
     {
@@ -33,16 +36,20 @@ public class ShootingScript : MonoBehaviour {
         ///If player shoots, aim and shoot at that target.  Will stop after the first collider it hits.
         if (Input.GetKeyDown(KeyCode.J) && redTarget != null)
         {
-            shootAt(redTarget);           
+            shootAt(redTarget);
+			sfxPlayer.PlaySfx("player_lasergun");
         }
         else if (Input.GetKeyDown(KeyCode.K) && greenTarget != null)
         {
             shootAt(greenTarget);            
+			sfxPlayer.PlaySfx("player_lasergun");
         }
         else if (Input.GetKeyDown(KeyCode.L) && blueTarget != null)
         {
             shootAt(blueTarget);            
+			sfxPlayer.PlaySfx("player_lasergun");
         }
+
 	}
 
     void FixedUpdate()

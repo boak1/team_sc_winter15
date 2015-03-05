@@ -12,7 +12,7 @@ public class SfxPlayer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		
         // Set up the dictionary from the list of sound effects
         foreach (AudioClip clip in soundEffects)
         {
@@ -23,19 +23,10 @@ public class SfxPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        // Test Code
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            PlaySfx("chargeup");
-        }
-        else if (Input.GetKeyDown(KeyCode.I))
-        {
-            PlaySfx("teleport");
-        }
 	}
 
     // When called, loads the specified sound effect into the AudioSource and plays it
-    void PlaySfx(string sfxName)
+    public void PlaySfx(string sfxName)
     {
         AudioClip clip = soundDict[sfxName];
         audioSource.PlayOneShot(clip, 0.7f);
