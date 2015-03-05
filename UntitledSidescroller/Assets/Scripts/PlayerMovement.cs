@@ -161,9 +161,9 @@ public class PlayerMovement : MonoBehaviour {
             }   
         }
 
-        positionIndex += newPosition;        
-        //if (positionIndex < 0) { positionIndex = 0; }
-        //else if (positionIndex > platMap.platformList.Count - 1) { positionIndex = platMap.platformList.Count - 1; }
+        positionIndex += newPosition;
+        if (positionIndex < 0) { positionIndex = 0; }
+        else if (positionIndex > platMap.platformList.Count - 1) { positionIndex = platMap.platformList.Count - 1; }
     }    
 
     void FixedUpdate()
