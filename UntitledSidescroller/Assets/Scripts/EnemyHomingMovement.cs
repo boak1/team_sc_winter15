@@ -7,6 +7,7 @@ public class EnemyHomingMovement : MonoBehaviour {
 
 	private bool homing, visible;
 	GameObject pm;
+	public float speed = .02f;
     public Vector2 boundstart = new Vector2(5, 5); 
 	public Vector2 boundend = new Vector2(5, 5);    
 
@@ -29,7 +30,7 @@ public class EnemyHomingMovement : MonoBehaviour {
 			float movex = pm.transform.position.x - transform.position.x;
 			float movey = pm.transform.position.y - transform.position.y;
 
-			transform.position = new Vector2 (transform.position.x + (movex/Math.Abs(movex)) * .02f, transform.position.y + (movey/Math.Abs(movey))*.02f);
+			transform.position = new Vector2 (transform.position.x + (movex/Math.Abs(movex)) * speed, transform.position.y + (movey/Math.Abs(movey))*speed);
 		}		        
 	}
 
