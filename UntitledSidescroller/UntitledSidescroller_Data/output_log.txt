@@ -1,0 +1,107 @@
+Initialize engine version: 4.5.5f1 (7684ad0c5a44)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 10.1]
+    Renderer: Intel(R) HD Graphics Family (ID=0x116)
+    Vendor:   Intel
+    VRAM:     64 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Owner\Documents\outlets\1 VGDC\team_sc_winter15\UntitledSidescroller\UntitledSidescroller_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Owner\Documents\outlets\1 VGDC\team_sc_winter15\UntitledSidescroller\UntitledSidescroller_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Owner\Documents\outlets\1 VGDC\team_sc_winter15\UntitledSidescroller\UntitledSidescroller_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Owner\Documents\outlets\1 VGDC\team_sc_winter15\UntitledSidescroller\UntitledSidescroller_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+- Completed reload, in  0.159 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+NullReferenceException: Object reference not set to an instance of an object
+  at SfxPlayer.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[UnityEngine.GameObject].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at PlayerMovement.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[UnityEngine.GameObject].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at PlayerMovement.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[UnityEngine.GameObject].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at PlayerMovement.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 4.969536 ms
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 51 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 8.957392 ms (FindLiveObjects: 0.026773 ms CreateObjectMapping: 0.035697 ms MarkObjects: 0.216416 ms  DeleteObjects: 6.344782 ms)
+
+UnloadTime: 0.635415 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 1.929895 ms (FindLiveObjects: 0.015617 ms CreateObjectMapping: 0.024095 ms MarkObjects: 0.165100 ms  DeleteObjects: 0.009370 ms)
+
+UnloadTime: 0.611765 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 1.894644 ms (FindLiveObjects: 0.015171 ms CreateObjectMapping: 0.025434 ms MarkObjects: 0.159300 ms  DeleteObjects: 0.008031 ms)
+
+0
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+UnloadTime: 0.688961 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1382.
+Total: 2.161482 ms (FindLiveObjects: 0.148144 ms CreateObjectMapping: 0.045960 ms MarkObjects: 0.427923 ms  DeleteObjects: 0.030342 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at SfxPlayer.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[UnityEngine.GameObject].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at PlayerMovement.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[UnityEngine.GameObject].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at PlayerMovement.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 4.593820 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 50 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 9.738721 ms (FindLiveObjects: 0.018741 ms CreateObjectMapping: 0.038374 ms MarkObjects: 0.203475 ms  DeleteObjects: 7.492010 ms)
+
+UnloadTime: 0.621136 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 1.953545 ms (FindLiveObjects: 0.015171 ms CreateObjectMapping: 0.029450 ms MarkObjects: 0.205706 ms  DeleteObjects: 0.008924 ms)
+
+UnloadTime: 0.599717 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 1.904014 ms (FindLiveObjects: 0.015617 ms CreateObjectMapping: 0.028557 ms MarkObjects: 0.162423 ms  DeleteObjects: 0.007585 ms)
+
