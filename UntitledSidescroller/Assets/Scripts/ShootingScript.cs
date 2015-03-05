@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ShootingScript : MonoBehaviour {
+    private Vector3 player_scale;
     ///Holders for the LineRenderer GameObjects
     private LineRenderer redLaserLine;
     private LineRenderer greenLaserLine;
@@ -22,6 +23,7 @@ public class ShootingScript : MonoBehaviour {
     
     void Start()
     {
+        player_scale = this.transform.parent.localScale;
         ///Link the components of each lineRender for easier use.
         redPredictionLine = GameObject.Find("Player/PlayerShooting/RedPredictionLineRenderer").GetComponent<LineRenderer>();
         greenPredictionLine = GameObject.Find("Player/PlayerShooting/GreenPredictionLineRenderer").GetComponent<LineRenderer>();
@@ -69,6 +71,14 @@ public class ShootingScript : MonoBehaviour {
     /// </summary>    
     void shootAt(GameObject target)
     {
+        if (this.transform.position.x > target.transform.position.x)
+        {
+            this.transform.parent.localScale = new Vector3(-player_scale.x, player_scale.y, player_scale.z);
+        }
+        else if (this.transform.position.x < target.transform.position.x)
+        {
+            this.transform.parent.localScale = new Vector3(player_scale.x, player_scale.y, player_scale.z);
+        }
         Dictionary<GameObject, LineRenderer> lineDict = new Dictionary<GameObject, LineRenderer>();
         if (redTarget!=null) lineDict.Add(redTarget, redLaserLine);
         if (greenTarget!=null) lineDict.Add(greenTarget, greenLaserLine);
