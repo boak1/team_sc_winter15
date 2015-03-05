@@ -53,7 +53,12 @@ public class BgmPlayer : MonoBehaviour {
             audioSources[flip].PlayScheduled(nextEventTime);
             // Debug.Log("Scheduled clip " + index + " to AudioSource " + flip + " at start at time " + nextEventTime);
             nextEventTime += 60.0F / bgmTempo * numBeatsPerSegment;
-            index = 1;
+            if (index < 2) {
+				index++;
+			} else if (index == 2) {
+				index--;
+			}
+
             flip = 1 - flip;
         }
 	}
