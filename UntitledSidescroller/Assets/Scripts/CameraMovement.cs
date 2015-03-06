@@ -55,4 +55,30 @@ public class CameraMovement : MonoBehaviour {
                 return new Vector2(0, 0);
         }
     }
+
+    public Vector2 getCurrentSpeed()
+    {
+        return speed;
+    }
+    public string getCurrentDirection()
+    {
+        return direction.ToString();
+    }
+
+    public Direction stringToDirection(string directionString)
+    {
+        switch (directionString)
+        {
+            case "Left":
+                return Direction.Left;
+            case "Right":
+                return Direction.Right;
+            case "Up":
+                return Direction.Up;
+            case "Down":
+                return Direction.Down;
+            default:
+                return Direction.Right;
+        }
+    }
 }

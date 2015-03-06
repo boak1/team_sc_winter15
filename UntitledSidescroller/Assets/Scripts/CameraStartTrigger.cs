@@ -21,8 +21,6 @@ public class CameraStartTrigger : MonoBehaviour {
         {            
             CM.direction = newDirection;
             CM.speed = newSpeed;
-            PlayerPrefs.SetInt("CheckpointCounter",0);
-            PlayerPrefs.SetInt("CurrentLevel", Application.loadedLevel);
         }
     }
 }

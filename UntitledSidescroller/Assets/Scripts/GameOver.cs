@@ -14,8 +14,7 @@ public class GameOver : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log(PlayerPrefs.GetInt("CheckpointCounter"));
+        {            
             Application.LoadLevel(PlayerPrefs.GetInt("CurrentLevel"));
         }
 

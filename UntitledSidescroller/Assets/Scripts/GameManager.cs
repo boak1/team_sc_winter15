@@ -4,13 +4,19 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    CameraMovement CM;
     void Awake()
     {
         Screen.SetResolution(800, 600, false);
     }
 
-    public static void gameOver()
+    void Start()
     {
+        CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();        
+    }
+    public static void gameOver()
+    {        
+        PlayerPrefs.SetInt("CurrentLevel", Application.loadedLevel);
         if (!GameWin.visible)
             Application.LoadLevel("Game Over");        
     }
@@ -19,7 +25,13 @@ public class GameManager : MonoBehaviour
     {
         if (level == 0)
         {
-            PlayerHealth.hp = 3;            
+            PlayerHealth.hp = 3;
+            CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>(); 
+            CM.transform.position = new Vector3(PlayerPrefs.GetFloat("CheckpointX"),
+                                    PlayerPrefs.GetFloat("CheckpointY"),
+                                    PlayerPrefs.GetFloat("CheckpointZ"));
+            CM.speed = new Vector2(PlayerPrefs.GetFloat("CameraSpeedX"), PlayerPrefs.GetFloat("CameraSpeedY"));
+            CM.direction = CM.stringToDirection(PlayerPrefs.GetString("CameraDirection"));
         }
     }
 }
