@@ -24,17 +24,19 @@ public class EnemyHomingMovement : MonoBehaviour {
             pm.transform.position.y > startPos.y - boundend.y && pm.transform.position.y < startPos.y + boundstart.y)
             homing = true;
         else
-            homing = false;
-
-		if (homing && visible) {
-			float movex = pm.transform.position.x - transform.position.x;
-			float movey = pm.transform.position.y - transform.position.y;
-
-			transform.position = new Vector2 (transform.position.x + (movex/Math.Abs(movex)) * speed, transform.position.y + (movey/Math.Abs(movey))*speed);
-		}		        
+            homing = false;			        
 	}
 
+    void FixedUpdate()
+    {
+        if (homing && visible)
+        {
+            float movex = pm.transform.position.x - transform.position.x;
+            float movey = pm.transform.position.y - transform.position.y;
 
+            transform.position = new Vector2(transform.position.x + (movex / Math.Abs(movex)) * speed, transform.position.y + (movey / Math.Abs(movey)) * speed);
+        }	
+    }
 
 	void OnBecameVisible()
 	{   //is the gameobject on screen?

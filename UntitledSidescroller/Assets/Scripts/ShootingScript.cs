@@ -87,7 +87,7 @@ public class ShootingScript : MonoBehaviour {
         if (hits.Length > 0)
         {            
             lineDict[target].SetPosition(0, this.transform.position);
-            lineDict[target].SetPosition(1, hits[0].transform.position);
+            lineDict[target].SetPosition(1, hits[0].point);
             if (hits[0].collider.CompareTag("Enemy"))
             {
                 Destroy(hits[0].collider.gameObject);
