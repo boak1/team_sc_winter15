@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour {
     /// :direction: Direction which the camera will move
     /// :speed:     How fast the camera will move
     /// </summary>
-    public enum Direction { Left, Right, Up, Down };
+    public enum Direction { Left, Right, Up, Down, UpLeft, UpRight, DownLeft, DownRight };
     public Direction direction;
     public Vector2 speed = new Vector2(0, 0);
 
@@ -32,7 +32,7 @@ public class CameraMovement : MonoBehaviour {
     void FixedUpdate()
     {
         /// Applies movement to the rigidbody
-        rigidbody2D.velocity = movement;
+        GetComponent<Rigidbody2D>().velocity = movement;
     }
 
     /// <summary>
@@ -51,6 +51,14 @@ public class CameraMovement : MonoBehaviour {
                 return new Vector2(0, 1);
             case Direction.Down:
                 return new Vector2(0, -1);
+            case Direction.UpLeft:
+                return new Vector2(-1, 1);
+            case Direction.UpRight:
+                return new Vector2(1, 1);
+            case Direction.DownLeft:
+                return new Vector2(-1, -1);
+            case Direction.DownRight:
+                return new Vector2(1, -1);
             default:
                 return new Vector2(0, 0);
         }
@@ -77,6 +85,14 @@ public class CameraMovement : MonoBehaviour {
                 return Direction.Up;
             case "Down":
                 return Direction.Down;
+            case "UpLeft":
+                return Direction.UpLeft;
+            case "UpRight":
+                return Direction.UpRight;
+            case "DownLeft":
+                return Direction.DownLeft;
+            case "DownRight":
+                return Direction.DownRight;
             default:
                 return Direction.Right;
         }

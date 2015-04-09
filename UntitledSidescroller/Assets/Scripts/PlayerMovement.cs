@@ -82,7 +82,9 @@ public class PlayerMovement : MonoBehaviour {
         }
 
 
-        if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right)
+        if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right ||
+            CM.direction == CameraMovement.Direction.UpLeft || CM.direction == CameraMovement.Direction.UpRight ||
+            CM.direction == CameraMovement.Direction.DownLeft || CM.direction == CameraMovement.Direction.DownRight)
         {
             if (Input.GetKeyDown(KeyCode.A) && positionIndex > 0)
             {
@@ -141,7 +143,7 @@ public class PlayerMovement : MonoBehaviour {
                 //    cooldown = dbltapCooldown; dblTapA = true;
                 //}
             }
-            else if (Input.GetKeyDown(KeyCode.S) && positionIndex < platMap.platformList.Count - 1)
+            else if (Input.GetKeyDown(KeyCode.S) && positionIndex < platMap.platformList.Count - 2)
             {
                 //dblTapA = false;
 
@@ -160,15 +162,15 @@ public class PlayerMovement : MonoBehaviour {
                 //}
             }   
         }
-
-        positionIndex += newPosition;
-        if (positionIndex < 0) { positionIndex = 0; }
-        else if (positionIndex > platMap.platformList.Count - 1) { positionIndex = platMap.platformList.Count - 1; }
+        if (platMap.platformList[positionIndex + newPosition].GetComponent<PlatformProperties>().getTeleportable() == true)
+            positionIndex += newPosition;
+        /*if (positionIndex < 0) { positionIndex = 0; }
+        else if (positionIndex > platMap.platformList.Count - 1) { positionIndex = platMap.platformList.Count - 1; }*/
     }    
 
     void FixedUpdate()
     {        
-        old_x = this.transform.position.x;
+        old_x = this.transform.position.x;        
         currentPlatform = platMap.platformList[positionIndex];
         transform.position = currentPlatform.transform.position + new Vector3(0f, .87f, 0f);
         if (this.transform.position.x < old_x)

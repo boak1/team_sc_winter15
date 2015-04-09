@@ -36,7 +36,7 @@ public class EnemyStandardMovement : MonoBehaviour {
         if (active)
         {
             /// Applies movement to the rigidbody      
-            rigidbody2D.velocity = movement;
+            GetComponent<Rigidbody2D>().velocity = movement;
         }        
     }
 
