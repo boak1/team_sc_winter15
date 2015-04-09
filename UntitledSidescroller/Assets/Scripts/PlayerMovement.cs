@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour {
                 //    cooldown = dbltapCooldown; dblTapA = true;
                 //}
             }
-            else if (Input.GetKeyDown(KeyCode.S) && positionIndex < platMap.platformList.Count - 2)
+            else if (Input.GetKeyDown(KeyCode.S) && positionIndex < platMap.platformList.Count - 1)
             {
                 //dblTapA = false;
 
@@ -162,10 +162,10 @@ public class PlayerMovement : MonoBehaviour {
                 //}
             }   
         }
-        if (platMap.platformList[positionIndex + newPosition].GetComponent<PlatformProperties>().getTeleportable() == true)
-            positionIndex += newPosition;
-        /*if (positionIndex < 0) { positionIndex = 0; }
-        else if (positionIndex > platMap.platformList.Count - 1) { positionIndex = platMap.platformList.Count - 1; }*/
+        //if (platMap.platformList[positionIndex + newPosition].GetComponent<PlatformProperties>().getTeleportable() == true)
+        positionIndex += newPosition;
+        if (positionIndex < 0) { positionIndex = 0; }
+        else if (positionIndex > platMap.platformList.Count - 1) { positionIndex = platMap.platformList.Count - 1; }
     }    
 
     void FixedUpdate()
