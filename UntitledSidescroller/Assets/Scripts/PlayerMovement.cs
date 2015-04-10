@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     public int positionIndex = 0;
     GameObject currentPlatform;
     private float old_x;
-    private Vector3 player_scale;
+    private Vector3 player_scale;    
 
     /// <summary>
     //  DOUBLE TAP VARIABLES

@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\EnemyHomingMovement.cs" />
      <Compile Include="Assets\Scripts\EnemyPreferences.cs" />
      <Compile Include="Assets\Scripts\EnemyStandardMovement.cs" />
+     <Compile Include="Assets\Scripts\EnemyWaypointMovement.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameOver.cs" />
      <Compile Include="Assets\Scripts\GameWin.cs" />

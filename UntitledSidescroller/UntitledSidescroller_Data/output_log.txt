@@ -10,8 +10,8 @@ Platform assembly: C:\Users\Edwin\Documents\GitHub\team_sc_winter15\UntitledSide
 Loading C:\Users\Edwin\Documents\GitHub\team_sc_winter15\UntitledSidescroller\UntitledSidescroller_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\Edwin\Documents\GitHub\team_sc_winter15\UntitledSidescroller\UntitledSidescroller_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\Edwin\Documents\GitHub\team_sc_winter15\UntitledSidescroller\UntitledSidescroller_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.101 seconds
-desktop: 1366x768 60Hz; virtual: 1920x1848 at -307,-1080
+- Completed reload, in  0.296 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 NullReferenceException: Object reference not set to an instance of an object
@@ -48,33 +48,85 @@ Parameter name: index
  
 (Filename:  Line: -1)
 
-UnloadTime: 5.163620 ms
+UnloadTime: 15.164330 ms
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
 Unloading 51 unused Assets to reduce memory usage. Loaded Objects now: 89.
-Total: 3.549272 ms (FindLiveObjects: 0.007244 ms CreateObjectMapping: 0.011470 ms MarkObjects: 0.068824 ms  DeleteObjects: 2.863445 ms)
+Total: 10.435363 ms (FindLiveObjects: 0.024752 ms CreateObjectMapping: 0.031393 ms MarkObjects: 0.162401 ms  DeleteObjects: 7.790449 ms)
 
-UnloadTime: 0.275900 ms
+UnloadTime: 0.603119 ms
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
 Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
-Total: 0.596475 ms (FindLiveObjects: 0.005433 ms CreateObjectMapping: 0.008452 ms MarkObjects: 0.060975 ms  DeleteObjects: 0.002414 ms)
+Total: 2.070168 ms (FindLiveObjects: 0.015093 ms CreateObjectMapping: 0.024752 ms MarkObjects: 0.147912 ms  DeleteObjects: 0.007244 ms)
 
-UnloadTime: 0.242695 ms
+UnloadTime: 1.063761 ms
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
 Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
-Total: 0.601305 ms (FindLiveObjects: 0.005433 ms CreateObjectMapping: 0.009055 ms MarkObjects: 0.063994 ms  DeleteObjects: 0.002414 ms)
+Total: 2.696833 ms (FindLiveObjects: 0.017507 ms CreateObjectMapping: 0.027167 ms MarkObjects: 0.170250 ms  DeleteObjects: 0.010263 ms)
+
+UnloadTime: 0.781218 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 2.877346 ms (FindLiveObjects: 0.019922 ms CreateObjectMapping: 0.039845 ms MarkObjects: 0.196210 ms  DeleteObjects: 0.011470 ms)
+
+UnloadTime: 1.061346 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 2.164349 ms (FindLiveObjects: 0.016904 ms CreateObjectMapping: 0.028375 ms MarkObjects: 0.168438 ms  DeleteObjects: 0.010263 ms)
 
 0
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-UnloadTime: 0.311519 ms
+UnloadTime: 0.578970 ms
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
 Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1382.
-Total: 0.966556 ms (FindLiveObjects: 0.079691 ms CreateObjectMapping: 0.026563 ms MarkObjects: 0.280126 ms  DeleteObjects: 0.018715 ms)
+Total: 2.742716 ms (FindLiveObjects: 0.167231 ms CreateObjectMapping: 0.096595 ms MarkObjects: 0.501090 ms  DeleteObjects: 0.033204 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at SfxPlayer.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[UnityEngine.GameObject].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at PlayerMovement.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 4.810470 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 50 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 9.745307 ms (FindLiveObjects: 0.017507 ms CreateObjectMapping: 0.028978 ms MarkObjects: 0.147308 ms  DeleteObjects: 7.807354 ms)
+
+UnloadTime: 0.790274 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 2.600841 ms (FindLiveObjects: 0.019319 ms CreateObjectMapping: 0.047694 ms MarkObjects: 0.230622 ms  DeleteObjects: 0.015696 ms)
+
+UnloadTime: 0.585611 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 2.021870 ms (FindLiveObjects: 0.015093 ms CreateObjectMapping: 0.027771 ms MarkObjects: 0.140063 ms  DeleteObjects: 0.007244 ms)
+
+0
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+UnloadTime: 0.587423 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1382.
+Total: 2.429987 ms (FindLiveObjects: 0.159986 ms CreateObjectMapping: 0.055542 ms MarkObjects: 0.485393 ms  DeleteObjects: 0.042260 ms)
 
 NullReferenceException: Object reference not set to an instance of an object
   at SfxPlayer.Start () [0x00000] in <filename unknown>:0 
@@ -92,6 +144,60 @@ ArgumentOutOfRangeException: Argument is out of range.
 Parameter name: index
   at System.Collections.Generic.List`1[UnityEngine.GameObject].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
   at PlayerMovement.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[UnityEngine.GameObject].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at PlatformMapper.Remove (UnityEngine.GameObject platform) [0x00000] in <filename unknown>:0 
+  at PlatformMovement.OnBecameInvisible () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 11.969425 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 50 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 10.536788 ms (FindLiveObjects: 0.018715 ms CreateObjectMapping: 0.043468 ms MarkObjects: 0.196813 ms  DeleteObjects: 8.261958 ms)
+
+UnloadTime: 0.632098 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 1.998325 ms (FindLiveObjects: 0.015093 ms CreateObjectMapping: 0.031997 ms MarkObjects: 0.148516 ms  DeleteObjects: 0.007848 ms)
+
+UnloadTime: 0.662284 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 1.904144 ms (FindLiveObjects: 0.015696 ms CreateObjectMapping: 0.033204 ms MarkObjects: 0.154553 ms  DeleteObjects: 0.007244 ms)
+
+UnloadTime: 0.597082 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 89.
+Total: 1.968139 ms (FindLiveObjects: 0.015696 ms CreateObjectMapping: 0.031997 ms MarkObjects: 0.146704 ms  DeleteObjects: 0.007848 ms)
+
+0
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+UnloadTime: 0.590441 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1382.
+Total: 3.031900 ms (FindLiveObjects: 0.234848 ms CreateObjectMapping: 0.062787 ms MarkObjects: 0.489016 ms  DeleteObjects: 0.033204 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at SfxPlayer.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[UnityEngine.GameObject].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at PlayerMovement.Start () [0x00000] in <filename unknown>:0 
  
 (Filename:  Line: -1)
 
