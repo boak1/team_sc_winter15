@@ -57,12 +57,6 @@ public class ShootingScript : MonoBehaviour {
     void FixedUpdate()
     {
         drawPredictionLines();
-        redLaserLine.SetPosition(0, this.transform.position);
-        redLaserLine.SetPosition(1, this.transform.position);
-        greenLaserLine.SetPosition(0, this.transform.position);
-        greenLaserLine.SetPosition(1, this.transform.position);
-        blueLaserLine.SetPosition(0, this.transform.position);
-        blueLaserLine.SetPosition(1, this.transform.position);
     }
 
     /// <summary>
@@ -79,15 +73,21 @@ public class ShootingScript : MonoBehaviour {
         {
             this.transform.parent.localScale = new Vector3(player_scale.x, player_scale.y, player_scale.z);
         }
+
         Dictionary<GameObject, LineRenderer> lineDict = new Dictionary<GameObject, LineRenderer>();
         if (redTarget!=null) lineDict.Add(redTarget, redLaserLine);
         if (greenTarget!=null) lineDict.Add(greenTarget, greenLaserLine);
         if (blueTarget!=null) lineDict.Add(blueTarget, blueLaserLine);       
+
+        Dictionary<LineRenderer, string> resetDict = new Dictionary<LineRenderer,string>{{redLaserLine, "resetRedLaserLine"},
+        {greenLaserLine, "resetGreenLaserLine"}, {blueLaserLine, "resetBlueLaserLine"}};
+
         RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, target.transform.position - this.transform.position);
         if (hits.Length > 0)
         {            
             lineDict[target].SetPosition(0, this.transform.position);
             lineDict[target].SetPosition(1, hits[0].point);
+            Invoke(resetDict[lineDict[target]], 1f);
             if (hits[0].collider.CompareTag("Enemy"))
             {
                 Destroy(hits[0].collider.gameObject);
@@ -140,7 +140,21 @@ public class ShootingScript : MonoBehaviour {
         }
     }
 
-
+    void resetRedLaserLine()
+    {
+        redLaserLine.SetPosition(0, this.transform.position);
+        redLaserLine.SetPosition(1, this.transform.position);        
+    }
+    void resetGreenLaserLine()
+    {
+        greenLaserLine.SetPosition(0, this.transform.position);
+        greenLaserLine.SetPosition(1, this.transform.position);        
+    }
+    void resetBlueLaserLine()
+    {
+        blueLaserLine.SetPosition(0, this.transform.position);
+        blueLaserLine.SetPosition(1, this.transform.position);
+    }
 
 
 
