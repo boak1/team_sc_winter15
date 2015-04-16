@@ -17,10 +17,6 @@ public class EnemyPreferences : MonoBehaviour {
     public COLOR initColor; 
 	public bool killOffScreen = true;
     ShootingScript SS;    
-
-    //Sound player (uses global sfxPlayer object)
-    public SfxPlayer soundPlayer;
-
     void Start()
     {
         SS = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();  //Import ShootingScript
@@ -47,8 +43,7 @@ public class EnemyPreferences : MonoBehaviour {
     {
         if (hit.gameObject.name == "Player")
         {
-            PlayerHealth.Damaged(1);
-            soundPlayer.PlaySfx("Hit_Hurt_loud");
+            PlayerHealth.hp -= 1;
             Destroy(this.gameObject);
         }
     }
