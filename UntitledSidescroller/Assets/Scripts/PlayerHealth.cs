@@ -9,7 +9,8 @@ public class PlayerHealth : MonoBehaviour
     public Sprite oneHP;
     public Sprite twoHP;
     //used to change sprites
-    private SpriteRenderer spriteRendererH;    
+    private SpriteRenderer spriteRendererH;   
+ 
     void Start()
     {
 
@@ -35,5 +36,10 @@ public class PlayerHealth : MonoBehaviour
         {
             GameManager.gameOver();
         }
+    }
+
+    public static void Damaged(int damage)
+    {
+        PlayerHealth.hp -= damage;
     }
 }
