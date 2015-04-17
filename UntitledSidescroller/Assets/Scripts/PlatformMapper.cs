@@ -12,12 +12,32 @@ public class PlatformMapper : MonoBehaviour
     public List<GameObject> platformList = new List<GameObject>();
     CameraMovement CM;
     PlayerMovement PM;
-
+	int shouldUpdate = 0; //used to stagger updates
     void Start()
     {
         CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();
         PM = GameObject.Find("Player").GetComponent<PlayerMovement>();
+		if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right ||
+		    CM.direction == CameraMovement.Direction.UpLeft || CM.direction == CameraMovement.Direction.UpRight ||
+		    CM.direction == CameraMovement.Direction.DownLeft || CM.direction == CameraMovement.Direction.DownRight)
+			platformList.Sort(CompareX);
+		else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
+			platformList.Sort(CompareY);
     }
+
+	void Update(){
+		if (shouldUpdate == 3) {
+			shouldUpdate = -1;
+			if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right ||
+			    CM.direction == CameraMovement.Direction.UpLeft || CM.direction == CameraMovement.Direction.UpRight ||
+			    CM.direction == CameraMovement.Direction.DownLeft || CM.direction == CameraMovement.Direction.DownRight)
+				platformList.Sort(CompareX);
+			else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
+				platformList.Sort(CompareY);
+		}
+		shouldUpdate++;
+	
+	}
 
     /// <summary>
     /// :Add & Remove:  Public methods which will be used by individual platforms to ADD or REMOVE THEMSELVES to and from the platformList
@@ -27,29 +47,13 @@ public class PlatformMapper : MonoBehaviour
     public void Add(GameObject platform)
     {
         platformList.Add(platform);
-        if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right)
-            platformList.Sort(CompareX);
-        else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
-            platformList.Sort(CompareY);
-        if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Up)
-        {
-            PM.positionIndex += 1;
-        }
     }
     public void Remove(GameObject platform)
     {
-        if (platformList[PM.positionIndex] == platform)
+		platformList.Remove(platform);
+        if (PM.currentPlatform == platform)
         {
             GameManager.gameOver();
-        }
-        platformList.Remove(platform);
-        if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right)
-            platformList.Sort(CompareX);
-        else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
-            platformList.Sort(CompareY);
-        if (CM.direction == CameraMovement.Direction.Right || CM.direction == CameraMovement.Direction.Down)
-        {
-            PM.positionIndex -= 1;
         }
     }
 

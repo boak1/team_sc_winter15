@@ -10,20 +10,12 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     PlatformMapper platMap;
     CameraMovement CM;    
-    public int positionIndex = 0;
-    GameObject currentPlatform;
+	public enum MOVE{FORWARD, BACK, FARF, FARB, NONE};
+	private MOVE moveIt = MOVE.NONE;
+    public GameObject currentPlatform;
     private float old_x;
     private Vector3 player_scale;    
 
-    /// <summary>
-    //  DOUBLE TAP VARIABLES
-    /// :dbltapCooldown:    # of seconds the window for a double tap stays open
-    /// :dblTapD & dblTapA: FOR BILLY TO EXPLAIN
-    /// :cooldown:          FOR BILLY TO EXPLAIN
-    /// </summary>
-    //float dbltapCooldown = .155f;
-    //bool dblTapD = false, dblTapA = false;
-    //float cooldown = -1;
 
 	/// <summary>
 	/// Sfx player and stuff
@@ -35,7 +27,8 @@ public class PlayerMovement : MonoBehaviour {
         player_scale = this.transform.localScale;
         platMap = GameObject.Find("PlatformMapper").GetComponent<PlatformMapper>();
         CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();        
-        currentPlatform = platMap.platformList[positionIndex];       
+        transform.position = (currentPlatform).transform.position + new Vector3(0f, .87f, 0f);
+
 
 		//sfxPlayer = GameObject.Find("Player").GetComponent<SfxPlayer>();
 		//sfxPlayer = GetComponentInParent<SfxPlayer> ();
@@ -43,136 +36,62 @@ public class PlayerMovement : MonoBehaviour {
 
     void Update()
     {        
-        int newPosition = 0;
-        //if (cooldown != -1)
-        //{
-        //    if (cooldown > 0)
-        //        cooldown -= Time.deltaTime;
-        //    else
-        //    {
-        //        if (dblTapA)
-        //            newPosition = -1;
-        //        else if(dblTapD)
-        //            newPosition = 1;
-
-        //        dblTapD = false;
-        //        dblTapA = false;
-        //        cooldown = -1;
-        //    }
-        //}
-
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            //dblTapA = false;
-            //dblTapD = false;
-            //cooldown = -1;
-
-            positionIndex = 0;
+        if (Input.GetKeyDown(KeyCode.Q)){
+            moveIt = MOVE.FARB;
         }
-
-
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            //dblTapA = false;
-            //dblTapD = false;
-            //cooldown = -1;
-
-            positionIndex = platMap.platformList.Count - 1;
-        }
-
-
-        if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right ||
+        else if (Input.GetKeyDown(KeyCode.E)){
+			moveIt = MOVE.FARF;
+		}
+		else if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right ||
             CM.direction == CameraMovement.Direction.UpLeft || CM.direction == CameraMovement.Direction.UpRight ||
-            CM.direction == CameraMovement.Direction.DownLeft || CM.direction == CameraMovement.Direction.DownRight)
-        {
-            if (Input.GetKeyDown(KeyCode.A) && positionIndex > 0)
-            {
-                //dblTapD = false;
-
-				//play teleport sound effect
-				sfxPlayer.PlaySfx("teleport");
-
-                //if (dblTapA && positionIndex > 1)
-                //{
-                //    cooldown = -1; 
-                newPosition = -1; 
-                //dblTapA = false;
-                //}
-                //else
-                //{
-                    //cooldown = dbltapCooldown; dblTapA = true;
-                //}
-            }
-            else if (Input.GetKeyDown(KeyCode.D) && positionIndex < platMap.platformList.Count - 1)
-            {
-                //dblTapA = false;
-
-				//play teleport sound effect
-				sfxPlayer.PlaySfx("teleport");
-
-                //if (dblTapD && positionIndex < platMap.platformList.Count - 2)
-                //{
-                //    cooldown = -1; 
-                newPosition = 1;
-                //dblTapD = false;
-                //}
-                //else
-                //{
-                //    dblTapD = true; cooldown = dbltapCooldown;
-                //}
-            }        
+            CM.direction == CameraMovement.Direction.DownLeft || CM.direction == CameraMovement.Direction.DownRight){
+            if (Input.GetKeyDown(KeyCode.A)){
+				moveIt = MOVE.BACK;
+			}
+			else if (Input.GetKeyDown(KeyCode.D)){
+				moveIt = MOVE.FORWARD;
+			}        
         }
-        else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
-        {
-            if (Input.GetKeyDown(KeyCode.W) && positionIndex > 0)
-            {
-                //dblTapD = false;
-
-				// play teleport sound effect
-				sfxPlayer.PlaySfx("teleport");
-
-                //if (dblTapA && positionIndex > 1)
-                //{
-                //    cooldown = -1; 
-                newPosition = -1; 
-                //dblTapA = false;
-                //}
-                //else
-                //{
-                //    cooldown = dbltapCooldown; dblTapA = true;
-                //}
-            }
-            else if (Input.GetKeyDown(KeyCode.S) && positionIndex < platMap.platformList.Count - 1)
-            {
-                //dblTapA = false;
-
-				//play teleport sound effect
-				sfxPlayer.PlaySfx("teleport");
-
-                //if (dblTapD && positionIndex < platMap.platformList.Count - 2)
-                //{
-                //    cooldown = -1; 
-                newPosition = 1; 
-                //dblTapD = false;
-                //}
-                //else
-                //{
-                //    dblTapD = true; cooldown = dbltapCooldown;
-                //}
-            }   
-        }
-        //if (platMap.platformList[positionIndex + newPosition].GetComponent<PlatformProperties>().getTeleportable() == true)
-        positionIndex += newPosition;
-        if (positionIndex < 0) { positionIndex = 0; }
-        else if (positionIndex > platMap.platformList.Count - 1) { positionIndex = platMap.platformList.Count - 1; }
-    }    
+        else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down){
+            if (Input.GetKeyDown(KeyCode.W)){
+				moveIt = MOVE.BACK;
+			}
+			else if (Input.GetKeyDown(KeyCode.S)){
+				moveIt = MOVE.FORWARD;
+			}   
+		}
+	}    
 
     void FixedUpdate()
     {        
-        old_x = this.transform.position.x;        
-        currentPlatform = platMap.platformList[positionIndex];
-        transform.position = currentPlatform.transform.position + new Vector3(0f, .87f, 0f);
+		int PI = getPlayerIndex(), platSize = platMap.platformList.Count;
+
+		switch (moveIt)
+		{
+		case MOVE.BACK:
+			if(PI>0)currentPlatform = platMap.platformList[PI-1];
+			break;
+		case MOVE.FORWARD:
+			if(PI<platSize-1)currentPlatform = platMap.platformList[PI+1];
+			break;
+		case MOVE.FARB:
+			currentPlatform = platMap.platformList[0];
+			break;
+		case MOVE.FARF:
+			currentPlatform = platMap.platformList[platSize-1];
+			break;
+		case MOVE.NONE:
+			break;
+		}
+		
+		moveIt = MOVE.NONE;
+
+		if(PI != getPlayerIndex())
+			sfxPlayer.PlaySfx("teleport"); //play teleport sound effect
+
+
+		old_x = this.transform.position.x;        
+		transform.position = (currentPlatform).transform.position + new Vector3(0f, .87f, 0f);
         if (this.transform.position.x < old_x)
         {                     
             this.transform.localScale = new Vector3(-player_scale.x, player_scale.y, player_scale.z);
@@ -183,82 +102,13 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+	public int getPlayerIndex(){
+		return platMap.platformList.IndexOf(currentPlatform);
+
+	}
+
     void OnBecameInvisible()
     {
         GameManager.gameOver();
     }
 }
-
-
-
-/// Trash below
-//    public int positionQueue = 0;
-//    GameManager GM;
-
-
-
-//    int keyDCount = 0;
-//    int keyACount = 0;
-
-//    // Use this for initialization
-//    void Start () {
-//        GM = GameObject.Find("GameManager").GetComponent<GameManager>();       
-//    }
-
-//    // Update is called once per frame
-//   
-
-//        //if (Input.GetKeyDown(KeyCode.D) && keyDCount == 0)
-//        //{
-//        //    //keyDCount += 1;
-//        //    newPosition = 1;
-//        //    float cooldown = dbltapCooldown;
-//        //    do
-//        //    {
-//        //        if (Input.GetKey(KeyCode.D))
-//        //        {
-//        //            newPosition = 2;
-//        //            break;
-//        //        }
-//        //        cooldown -= Time.deltaTime;
-//        //    } while (cooldown > 0);           
-//        //}
-
-//        ///////////////////////////////////////
-//        //if (Input.GetKeyDown(KeyCode.D)){
-//        //    if (dbltapCooldown > 0 && keyDCount == 1)
-//        //    {
-//        //        newPosition = 2;
-//        //    }
-//        //    else
-//        //    {
-//        //        dbltapCooldown = 0.5f;
-//        //        keyDCount += 1;
-//        //        //newPosition = 1;
-//        //    }
-//        //}
-
-//        //if (dbltapCooldown > 0)
-//        //{
-//        //    dbltapCooldown -= Time.deltaTime;
-//        //}
-//        //else
-//        //{
-
-//        //    keyACount = 0;
-//        //    keyDCount = 0;
-//        //}
-
-
-
-
-//        /////////////////////////
-//        //if (Input.GetKeyDown(KeyCode.W))
-//        //{
-//        //    //Debug.Log()
-//        //    //newPosition += ;
-//        //}
-//        //if (Input.GetKeyDown(KeyCode.S))
-//        //{
-//        //    newPosition += 2;
-//        //}
