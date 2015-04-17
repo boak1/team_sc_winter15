@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class ShootingScript : MonoBehaviour {
     private Vector3 player_scale;
+    private int defaultVertexCount = 2;
     ///Holders for the LineRenderer GameObjects
     private LineRenderer redLaserLine;
     private LineRenderer greenLaserLine;
@@ -53,16 +54,21 @@ public class ShootingScript : MonoBehaviour {
         }
 
 	}
+	public bool isEnemyNull(EnemyPreferences.COLOR c)
+	{
+		if (c == EnemyPreferences.COLOR.RED)
+						return (redTarget == null);
+		else if (c == EnemyPreferences.COLOR.BLUE)
+						return (blueTarget == null);
+		else if (c == EnemyPreferences.COLOR.GREEN)
+						return (greenTarget == null);
+				else
+						return true;
 
+	}
     void FixedUpdate()
     {
         drawPredictionLines();
-        redLaserLine.SetPosition(0, this.transform.position);
-        redLaserLine.SetPosition(1, this.transform.position);
-        greenLaserLine.SetPosition(0, this.transform.position);
-        greenLaserLine.SetPosition(1, this.transform.position);
-        blueLaserLine.SetPosition(0, this.transform.position);
-        blueLaserLine.SetPosition(1, this.transform.position);
     }
 
     /// <summary>
@@ -79,18 +85,31 @@ public class ShootingScript : MonoBehaviour {
         {
             this.transform.parent.localScale = new Vector3(player_scale.x, player_scale.y, player_scale.z);
         }
+
         Dictionary<GameObject, LineRenderer> lineDict = new Dictionary<GameObject, LineRenderer>();
         if (redTarget!=null) lineDict.Add(redTarget, redLaserLine);
         if (greenTarget!=null) lineDict.Add(greenTarget, greenLaserLine);
         if (blueTarget!=null) lineDict.Add(blueTarget, blueLaserLine);       
+
+        Dictionary<LineRenderer, string> resetDict = new Dictionary<LineRenderer,string>{{redLaserLine, "resetRedLaserLine"},
+        {greenLaserLine, "resetGreenLaserLine"}, {blueLaserLine, "resetBlueLaserLine"}};
+
         RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, target.transform.position - this.transform.position);
         if (hits.Length > 0)
         {            
             lineDict[target].SetPosition(0, this.transform.position);
             lineDict[target].SetPosition(1, hits[0].point);
+            Invoke(resetDict[lineDict[target]], 1f);
             if (hits[0].collider.CompareTag("Enemy"))
             {
                 Destroy(hits[0].collider.gameObject);
+            }
+            if (hits[0].collider.CompareTag("Mirror"))
+            {
+                lineDict[target].SetVertexCount(defaultVertexCount+1);
+                Vector3 pos = Vector3.Reflect((Vector3)hits[0].point - this.transform.position, hits[0].normal);
+                lineDict[target].SetPosition(2, pos);
+                hits[0].collider.GetComponent<Mirror>().Reflect(pos);
             }
         }
     }
@@ -140,7 +159,24 @@ public class ShootingScript : MonoBehaviour {
         }
     }
 
-
+    void resetRedLaserLine()
+    {
+        redLaserLine.SetVertexCount(2);
+        redLaserLine.SetPosition(0, this.transform.position);
+        redLaserLine.SetPosition(1, this.transform.position);        
+    }
+    void resetGreenLaserLine()
+    {
+        greenLaserLine.SetVertexCount(2);
+        greenLaserLine.SetPosition(0, this.transform.position);
+        greenLaserLine.SetPosition(1, this.transform.position);        
+    }
+    void resetBlueLaserLine()
+    {
+        blueLaserLine.SetVertexCount(2);
+        blueLaserLine.SetPosition(0, this.transform.position);
+        blueLaserLine.SetPosition(1, this.transform.position);
+    }
 
 
 
