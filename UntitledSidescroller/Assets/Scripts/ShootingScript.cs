@@ -54,7 +54,18 @@ public class ShootingScript : MonoBehaviour {
         }
 
 	}
+	public bool isEnemyNull(EnemyPreferences.COLOR c)
+	{
+		if (c == EnemyPreferences.COLOR.RED)
+						return (redTarget == null);
+		else if (c == EnemyPreferences.COLOR.BLUE)
+						return (blueTarget == null);
+		else if (c == EnemyPreferences.COLOR.GREEN)
+						return (greenTarget == null);
+				else
+						return true;
 
+	}
     void FixedUpdate()
     {
         drawPredictionLines();
