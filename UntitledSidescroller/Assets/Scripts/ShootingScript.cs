@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class ShootingScript : MonoBehaviour {
     private Vector3 player_scale;
+    private int defaultVertexCount = 2;
     ///Holders for the LineRenderer GameObjects
     private LineRenderer redLaserLine;
     private LineRenderer greenLaserLine;
@@ -92,6 +93,13 @@ public class ShootingScript : MonoBehaviour {
             {
                 Destroy(hits[0].collider.gameObject);
             }
+            if (hits[0].collider.CompareTag("Mirror"))
+            {
+                lineDict[target].SetVertexCount(defaultVertexCount+1);
+                Vector3 pos = Vector3.Reflect((Vector3)hits[0].point - this.transform.position, hits[0].normal);
+                lineDict[target].SetPosition(2, pos);
+                hits[0].collider.GetComponent<Mirror>().Reflect(pos);
+            }
         }
     }
 
@@ -142,16 +150,19 @@ public class ShootingScript : MonoBehaviour {
 
     void resetRedLaserLine()
     {
+        redLaserLine.SetVertexCount(2);
         redLaserLine.SetPosition(0, this.transform.position);
         redLaserLine.SetPosition(1, this.transform.position);        
     }
     void resetGreenLaserLine()
     {
+        greenLaserLine.SetVertexCount(2);
         greenLaserLine.SetPosition(0, this.transform.position);
         greenLaserLine.SetPosition(1, this.transform.position);        
     }
     void resetBlueLaserLine()
     {
+        blueLaserLine.SetVertexCount(2);
         blueLaserLine.SetPosition(0, this.transform.position);
         blueLaserLine.SetPosition(1, this.transform.position);
     }
