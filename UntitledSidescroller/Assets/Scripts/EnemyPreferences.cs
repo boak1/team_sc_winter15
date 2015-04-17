@@ -16,6 +16,7 @@ public class EnemyPreferences : MonoBehaviour {
     public enum COLOR { BLANK, RED, GREEN, BLUE, INDESTRUCTIBLE };
     public COLOR initColor; 
 	public bool killOffScreen = true;
+	public bool givesHp;
     ShootingScript SS;    
     void Start()
     {
@@ -52,5 +53,17 @@ public class EnemyPreferences : MonoBehaviour {
 	{
 		if(killOffScreen)
 		Destroy (this.gameObject);
+	}
+	void OnDestroy()
+	{
+		if(givesHp)
+		{
+			Debug.Log("U HAVE HP!!!");
+			if( PlayerHealth.hp < PlayerHealth.maxHp)
+			{
+				Debug.Log("gimme hp");
+				PlayerHealth.hp +=1;
+			}
+		}
 	}
 }

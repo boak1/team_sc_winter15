@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Health : MonoBehaviour {
 
-    public int health;
+    public int healthMax;
+	public int health;
 
     public enum COLOR { BLANK, RED, GREEN, BLUE };
     public COLOR initColor; 
@@ -18,6 +19,7 @@ public class Health : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         setColor(initColor);
+		 health = healthMax;
 	}
 	
 	// Update is called once per frame
