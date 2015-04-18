@@ -22,6 +22,8 @@ public class ShootingScript : MonoBehaviour {
 	/// Sound effects player (uses the global player)
 	public SfxPlayer sfxPlayer;
     
+	public int laserDamage = 1;
+
     void Start()
     {
         player_scale = this.transform.parent.localScale;
@@ -102,7 +104,10 @@ public class ShootingScript : MonoBehaviour {
             Invoke(resetDict[lineDict[target]], 1f);
             if (hits[0].collider.CompareTag("Enemy"))
             {
-                Destroy(hits[0].collider.gameObject);
+				EnemyPreferences hitEnemy;
+				hitEnemy = hits[0].collider.gameObject.GetComponentInParent<EnemyPreferences>();
+				hitEnemy.tookDamage();
+               // Destroy(hits[0].collider.gameObject);
             }
             if (hits[0].collider.CompareTag("Mirror"))
             {

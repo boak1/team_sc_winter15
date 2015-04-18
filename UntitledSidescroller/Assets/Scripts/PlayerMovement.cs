@@ -12,8 +12,10 @@ public class PlayerMovement : MonoBehaviour {
     CameraMovement CM;    
 	public enum MOVE{FORWARD, BACK, FARF, FARB, NONE};
 	private MOVE moveIt = MOVE.NONE;
-    public GameObject currentPlatform;
-    private float old_x;
+
+	public GameObject currentPlatform;
+	public GameObject startPlatform;
+	private float old_x;
     private Vector3 player_scale;    
 
 
@@ -29,6 +31,8 @@ public class PlayerMovement : MonoBehaviour {
         CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();        
         transform.position = (currentPlatform).transform.position + new Vector3(0f, .87f, 0f);
 
+		if (startPlatform == null)
+						startPlatform = currentPlatform;
 
 		//sfxPlayer = GameObject.Find("Player").GetComponent<SfxPlayer>();
 		//sfxPlayer = GetComponentInParent<SfxPlayer> ();

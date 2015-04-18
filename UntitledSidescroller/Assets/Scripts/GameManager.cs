@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     CameraMovement CM;
+	PlayerMovement PM;
     void Awake()
     {
         Screen.SetResolution(800, 600, false);
@@ -12,7 +13,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();        
+        CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();   
+		PM = GameObject.Find("Player").GetComponent<PlayerMovement>();
+		PM.currentPlatform = PM.startPlatform;
+
     }
     public static void gameOver()
     {        
@@ -32,6 +36,7 @@ public class GameManager : MonoBehaviour
                                     PlayerPrefs.GetFloat("CheckpointZ"));
             CM.speed = new Vector2(PlayerPrefs.GetFloat("CameraSpeedX"), PlayerPrefs.GetFloat("CameraSpeedY"));
             CM.direction = CM.stringToDirection(PlayerPrefs.GetString("CameraDirection"));
+			PM.currentPlatform = PM.startPlatform;
         }
     }
 }

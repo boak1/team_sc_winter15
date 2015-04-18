@@ -18,7 +18,8 @@ public class EnemyPreferences : MonoBehaviour {
 	public bool killOffScreen = true;
 	public bool givesHp, diesOnContact = true;
 	public int contactDamage = 1, hp4Kill = 1, enemyHP = 1;
-    ShootingScript SS;    
+    ShootingScript SS; 
+
     void Start()
     {
         SS = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();  //Import ShootingScript
@@ -43,19 +44,32 @@ public class EnemyPreferences : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D hit)
     {
-        if (hit.gameObject.name == "Player")
-        {
-            PlayerHealth.hp -= contactDamage;
+			if (hit.gameObject.name == "Player") {
+						PlayerHealth.hp -= contactDamage;
+						if (diesOnContact)
+								Destroy (this.gameObject);
+				}
 
-            Destroy(this.gameObject);
-        }
-    }
+			if(enemyHP <= 0){
+				Destroy(this.gameObject);
+				}
+	}
 
+
+	public void tookDamage(){
+		enemyHP -= SS.laserDamage;
+
+		if (enemyHP <= 0)
+				Destroy (this.gameObject);
+	}
+	
 	void OnBecameInvisible()
 	{
 		if(killOffScreen)
 		Destroy (this.gameObject);
 	}
+
+
 	void OnDestroy()
 	{
 		if(givesHp)

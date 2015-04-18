@@ -25,9 +25,11 @@ public class PlatformWaypointMovement : MonoBehaviour {
 			//should the platform stop or go back to the begining?
 			if (index > waypoints.Length - 1 && !stopAtEnd)
 				index = 0;
-			else if(index > waypoints.Length - 1)//if the platform should stop, stop checking its position
+			else if(index > waypoints.Length - 1){//if the platform should stop, stop checking its position
 				stop = true;
+				index--;
 		}            
 	}
 
+}
 }
