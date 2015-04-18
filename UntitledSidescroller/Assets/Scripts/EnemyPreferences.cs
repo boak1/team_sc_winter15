@@ -16,7 +16,8 @@ public class EnemyPreferences : MonoBehaviour {
     public enum COLOR { BLANK, RED, GREEN, BLUE, INDESTRUCTIBLE };
     public COLOR initColor; 
 	public bool killOffScreen = true;
-	public bool givesHp;
+	public bool givesHp, diesOnContact = true;
+	public int contactDamage = 1, hp4Kill = 1, enemyHP = 1;
     ShootingScript SS;    
     void Start()
     {
@@ -44,7 +45,8 @@ public class EnemyPreferences : MonoBehaviour {
     {
         if (hit.gameObject.name == "Player")
         {
-            PlayerHealth.hp -= 1;
+            PlayerHealth.hp -= contactDamage;
+
             Destroy(this.gameObject);
         }
     }
@@ -62,7 +64,7 @@ public class EnemyPreferences : MonoBehaviour {
 			if( PlayerHealth.hp < PlayerHealth.maxHp)
 			{
 				Debug.Log("gimme hp");
-				PlayerHealth.hp +=1;
+				PlayerHealth.hp += hp4Kill;
 			}
 		}
 	}
