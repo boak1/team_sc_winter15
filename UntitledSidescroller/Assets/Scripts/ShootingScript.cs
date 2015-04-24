@@ -95,6 +95,8 @@ public class ShootingScript : MonoBehaviour {
 
         Dictionary<LineRenderer, string> resetDict = new Dictionary<LineRenderer,string>{{redLaserLine, "resetRedLaserLine"},
         {greenLaserLine, "resetGreenLaserLine"}, {blueLaserLine, "resetBlueLaserLine"}};
+        Dictionary<LineRenderer, string> colorDict = new Dictionary<LineRenderer,string>{{redLaserLine, "redLaser"},
+        {greenLaserLine, "greenLaser"}, {blueLaserLine, "blueLaser"}};
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, target.transform.position - this.transform.position);
         if (hits.Length > 0)
@@ -111,10 +113,10 @@ public class ShootingScript : MonoBehaviour {
             }
             if (hits[0].collider.CompareTag("Mirror"))
             {
-                lineDict[target].SetVertexCount(defaultVertexCount+1);
+                //lineDict[target].SetVertexCount(defaultVertexCount+1);
                 Vector3 pos = Vector3.Reflect((Vector3)hits[0].point - this.transform.position, hits[0].normal);
-                lineDict[target].SetPosition(2, pos);
-                hits[0].collider.GetComponent<Mirror>().Reflect(pos);
+                //lineDict[target].SetPosition(2, pos);
+                hits[0].collider.GetComponent<Mirror>().Shoot(hits[0].point, pos, colorDict[lineDict[target]]);
             }
         }
     }
