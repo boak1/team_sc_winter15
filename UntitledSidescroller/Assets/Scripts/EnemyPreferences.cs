@@ -18,11 +18,14 @@ public class EnemyPreferences : MonoBehaviour {
 	public bool killOffScreen = true;
 	public bool givesHp, diesOnContact = true;
 	public int contactDamage = 1, hp4Kill = 1, enemyHP = 1;
-    ShootingScript SS; 
+    ShootingScript SS;
+
+    public SfxPlayer sfxplayer;
 
     void Start()
     {
         SS = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();  //Import ShootingScript
+        sfxplayer = GameObject.Find("SfxPlayer").GetComponent<SfxPlayer>();
     }
     void OnBecameVisible()
     {
@@ -46,6 +49,7 @@ public class EnemyPreferences : MonoBehaviour {
     {
 			if (hit.gameObject.name == "Player") {
 						PlayerHealth.hp -= contactDamage;
+                        sfxplayer.PlaySfx("Hit_Hurt_loud");
 						if (diesOnContact)
 								Destroy (this.gameObject);
 				}
