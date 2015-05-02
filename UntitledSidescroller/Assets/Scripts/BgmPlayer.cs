@@ -16,9 +16,9 @@ public class BgmPlayer : MonoBehaviour {
     public float bgmTempo;
     public int numBeatsPerSegment;
     public float bgmStartDelayInSeconds = 0.0F;
-    public string currentTrack = "village";
+    public string currentTrack;
 
-    private Dictionary<string, AudioClip[]> trackList = new Dictionary<string,AudioClip[]>(); 
+    private Dictionary<string, AudioClip[]> trackList = new Dictionary<string, AudioClip[]>(); 
     private int index = 0;
     private int flip = 0;
     private double nextEventTime;
@@ -35,6 +35,10 @@ public class BgmPlayer : MonoBehaviour {
             child.transform.parent = gameObject.transform;
             audioSources[i] = child.AddComponent<AudioSource>() as AudioSource;
         }
+
+        currentTrack = "village";
+        bgmTempo = 92.0f;
+        numBeatsPerSegment = 32;
 
         //initialize trackList dictionary for Pirate Mountain (is there an easier way to do array slices?)
         trackList.Add("village", new AudioClip[1] {bgmClips[0]});
@@ -60,7 +64,7 @@ public class BgmPlayer : MonoBehaviour {
         {
             audioSources[flip].clip = trackList[currentTrack][index];
             audioSources[flip].PlayScheduled(nextEventTime);
-            // Debug.Log("Scheduled clip " + index + " to AudioSource " + flip + " at start at time " + nextEventTime);
+            Debug.Log("Scheduled clip " + index + " to AudioSource " + flip + " at start at time " + nextEventTime);
             nextEventTime += 60.0F / bgmTempo * numBeatsPerSegment;
 
             if (currentTrack == "village") {
