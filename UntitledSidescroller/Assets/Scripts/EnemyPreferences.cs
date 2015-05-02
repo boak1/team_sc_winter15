@@ -57,10 +57,12 @@ public class EnemyPreferences : MonoBehaviour {
 
 
 	public void tookDamage(){
+		if(initColor != COLOR.INDESTRUCTIBLE){
 		enemyHP -= SS.laserDamage;
 
 		if (enemyHP <= 0)
 				Destroy (this.gameObject);
+		}
 	}
 	
 	void OnBecameInvisible()
