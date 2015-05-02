@@ -18,6 +18,7 @@ public class EnemyPreferences : MonoBehaviour {
 	public bool killOffScreen = true;
 	public bool givesHp, diesOnContact = true;
 	public int contactDamage = 1, hp4Kill = 1, enemyHP = 1;
+    public SfxPlayer sfxPlayer;
     ShootingScript SS; 
 
     void Start()
@@ -48,11 +49,13 @@ public class EnemyPreferences : MonoBehaviour {
 						PlayerHealth.hp -= contactDamage;
 						if (diesOnContact)
 								Destroy (this.gameObject);
-				}
+			}
 
 			if(enemyHP <= 0){
 				Destroy(this.gameObject);
-				}
+			}
+
+            sfxPlayer.PlaySfx("Hit_Hurt_loud");
 	}
 
 
