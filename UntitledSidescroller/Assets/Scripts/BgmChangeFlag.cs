@@ -6,13 +6,13 @@ public class BgmChangeFlag : MonoBehaviour {
     private bool becameVisibleAndTriggered = false;
     public string trackName;
     
-
 	// Use this for initialization
 	void Start () {
         bgmPlayer = GameObject.Find("BgmPlayer").GetComponent<BgmPlayer>();
 	}
-	
-	void OnBecameVisible ()
+
+    //for some reason, this method seems to be called more than once after flag enters camera view
+    void OnBecameVisible ()
     {
         if (!becameVisibleAndTriggered)
         {
