@@ -4,9 +4,9 @@ using System.Collections.Generic;
 /// <summary>
 /// Music player for Pirate Mountain
 /// 
-/// TODO: create flag gameobjects in the scene to switch tracks at certain places
 /// TODO: test EVERYTHING
-/// TODO: figure out how to switch track and start playback when in the middle of previous track's clip
+/// TODO: switching tracks works, but now looping doesn't
+/// IN PROGRESS: figure out how to switch track and start playback when in the middle of previous track's clip
 /// </summary>
 
 [RequireComponent(typeof(AudioSource))]
@@ -15,7 +15,7 @@ public class BgmPlayer : MonoBehaviour {
     public AudioClip[] bgmClips = new AudioClip[2];
     public float bgmTempo;
     public int numBeatsPerSegment;
-    public float bgmStartDelayInSeconds = 0.0F;
+    public float bgmStartDelayInSeconds = 0.0f;
     public string currentTrack;
 
     private Dictionary<string, AudioClip[]> trackList = new Dictionary<string, AudioClip[]>(); 
@@ -25,6 +25,7 @@ public class BgmPlayer : MonoBehaviour {
     private AudioSource[] audioSources = new AudioSource[2];
     private float volume = 1.0f;
     private bool running = false;
+    private bool changeFlagOn = false;
 
 	// Use this for initialization
 	void Start () 
@@ -36,9 +37,9 @@ public class BgmPlayer : MonoBehaviour {
             audioSources[i] = child.AddComponent<AudioSource>() as AudioSource;
         }
 
+        //initialize nextEvenTime calculation settings to the first track to play
         currentTrack = "village";
-        bgmTempo = 92.0f;
-        numBeatsPerSegment = 32;
+        updateTrackSettings(currentTrack);
 
         //initialize trackList dictionary for Pirate Mountain (is there an easier way to do array slices?)
         trackList.Add("village", new AudioClip[1] {bgmClips[0]});
@@ -60,45 +61,77 @@ public class BgmPlayer : MonoBehaviour {
 
         	double time = AudioSettings.dspTime;
 
-        if (time + 1.0F > nextEventTime)
+        if (time + 1.0f > nextEventTime)
         {
             audioSources[flip].clip = trackList[currentTrack][index];
             audioSources[flip].PlayScheduled(nextEventTime);
-            Debug.Log("Scheduled clip " + index + " to AudioSource " + flip + " at start at time " + nextEventTime);
-            nextEventTime += 60.0F / bgmTempo * numBeatsPerSegment;
 
-            if (currentTrack == "village") {
-                bgmTempo = 92.0f;
-                numBeatsPerSegment = 32;
-                index = GetNextIndexVillage(index);
-            } else if (currentTrack == "cave") {
-                bgmTempo = 160.0f;
-                numBeatsPerSegment = 192;
-                index = GetNextIndexCave(index);
-            } else if (currentTrack == "boss") {
-                bgmTempo = 254.0f;
-                numBeatsPerSegment = 32;
-                index = GetNextIndexBoss(index);
+            if (!changeFlagOn)
+            {
+                updateTrackSettings(currentTrack);
+                changeFlagOn = false;
             }
 
-            flip = 1 - flip;
+            nextEventTime += 60.0f / bgmTempo * numBeatsPerSegment;
+            Debug.Log("Scheduled clip " + index + " to AudioSource " + flip + " at start at time " + nextEventTime);
 
+            flip = 1 - flip;
         }
 	}
 
-
     /* Methods for affecting currently playing Audio */
     
-    //Resets audio volume and changes currentTrack.
-    //TODO: reset nextEventTime so that new track playback starts immediately
-    public void SwitchTrack (string trackName)
+    //Resets audio volume and starts playback of new track immediately
+    public void SwitchTrack (string trackName, bool fadeOut = false)
     {
-        currentTrack = trackName;
+        changeFlagOn = true;
+        audioSources[1 - flip].Stop();
+        index = -1;
         audioSources[0].volume = 1.0f;
         audioSources[1].volume = 1.0f;
+        if (fadeOut)
+        {
+            //TODO: call FadeOut() somewhere in this class and calculate nextEventTime to account for fadeout time
+        }
+        
+        updateTrackSettings(trackName, true);
+        nextEventTime += 60.0f / bgmTempo * numBeatsPerSegment;
+        //Debug.Log("delta nextEventTime = " + (60.0f / bgmTempo * numBeatsPerSegment));
+        
+        audioSources[flip].clip = trackList[trackName][index];
+        audioSources[flip].Play();
+        flip = 1 - flip;
+
+        Debug.Log("SwitchTrack: Scheduled clip " + index + " to AudioSource " + flip + " at start at time " + nextEventTime);
     }
 
-    public void FadeOut()
+    /* TODO: make a generic BgmTrack class that has public vars for bgmTempo, 
+       numBeatsPerSegment, and a public method for GetNextIndex */
+    void updateTrackSettings (string trackName, bool playFromStart = false)
+    {
+        currentTrack = trackName;
+        switch (trackName)
+        {
+            case "village":
+                
+                bgmTempo = 92.0f;
+                numBeatsPerSegment = 32;
+                index = GetNextIndexVillage(index);
+                break;
+            case "cave":
+                bgmTempo = 16.0f;
+                numBeatsPerSegment = 192;
+                index = GetNextIndexCave(index, playFromStart);
+                break;
+            case "boss":
+                bgmTempo = 254.0f;
+                numBeatsPerSegment = 32;
+                index = GetNextIndexBoss(index, playFromStart);
+                break;
+        }
+    }
+
+    void FadeOut ()
     {
         if (volume > 0.1f)
         {
@@ -109,6 +142,7 @@ public class BgmPlayer : MonoBehaviour {
     }
 
     /* Methods for controlling the order of clip playback */
+    //TODO: turn these into a generic GetNextIndex() method inside a generic BgmTrack class
 
     //Village track only has 1 clip to loop
     int GetNextIndexVillage (int currentIndex)
@@ -117,17 +151,33 @@ public class BgmPlayer : MonoBehaviour {
     }
 
     //Ice cave has 2 clips; loops 2nd clip
-    int GetNextIndexCave(int currentIndex)
+    int GetNextIndexCave(int currentIndex, bool playFromStart = false)
     {
+        if (playFromStart)
+        {
+            return 0;
+        }
+        else
+        {
+
+        }
         return 1;
     }
 
     //Boss track has 8 clips; loops back to 2nd clip
-    int GetNextIndexBoss(int currentIndex)
+    int GetNextIndexBoss(int currentIndex, bool playFromStart = false)
     {
-        if (currentIndex + 1 == 8) {
+        if (playFromStart)
+        {
+            return 0;
+        }
+
+        if (currentIndex + 1 == 8) 
+        {
             return 1;
-        } else {
+        } 
+        else 
+        {
             return currentIndex + 1;
         }
     }

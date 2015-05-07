@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BgmChangeFlag.cs" />
      <Compile Include="Assets\Scripts\BgmPlayer.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CameraStartTrigger.cs" />
