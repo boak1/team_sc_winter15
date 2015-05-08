@@ -12,30 +12,20 @@ public class PlatformFallingBehavior : MonoBehaviour {
 	{
         //beautiful code...
         if (playerIsOnThisPlatform())
-            fall();
+            moveSelfTo(bottom.position, fallSpeed);
         else 
-            returnToOrigin();
+            moveSelfTo(origin.position, returnSpeed);
 	}
 
-    //some functions 
-    void fall()
-    {
-        moveSelfTo(bottom.position, fallSpeed);
-    }
-
-    void returnToOrigin()
-    {
-        moveSelfTo(origin.position, returnSpeed);
-    }
-
-    void moveSelfTo(Vector3 destination, float speed)
+    //private helper functions
+    private void moveSelfTo(Vector3 destination, float speed)
     {
         float step = speed * Time.deltaTime;
         if (transform.position != destination)
             transform.position = Vector3.MoveTowards(transform.position, destination, step);
     }
 
-    bool playerIsOnThisPlatform()
+    private bool playerIsOnThisPlatform()
     {
         return this.gameObject == GameObject.Find("Player").GetComponent<PlayerMovement>().currentPlatform;
     }
