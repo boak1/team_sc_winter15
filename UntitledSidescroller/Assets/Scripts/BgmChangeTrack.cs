@@ -7,9 +7,14 @@ using System.Collections;
 /// </summary>
 
 public class BgmChangeTrack : MonoBehaviour {
+
+    public string trackName;
+    public bool fadeOutPrevTrack;
+    public float fadeOutStep = 0.0f;
+    public float fadeOutSpeed = 0.0f;
+
     private BgmPlayer bgmPlayer;
     private bool becameVisibleAndTriggered = false;
-    public string trackName;
     
 	// Use this for initialization
 	void Start () {
@@ -21,7 +26,14 @@ public class BgmChangeTrack : MonoBehaviour {
     {
         if (!becameVisibleAndTriggered)
         {
-            bgmPlayer.SwitchTrack(trackName);
+            if (fadeOutPrevTrack)
+            {
+                bgmPlayer.FadeAndSwitchTrack(trackName, fadeOutStep, fadeOutSpeed);
+            }
+            else
+            {
+                bgmPlayer.SwitchTrack(trackName);
+            }
             becameVisibleAndTriggered = true;
         }
     }
@@ -30,4 +42,5 @@ public class BgmChangeTrack : MonoBehaviour {
     {
         becameVisibleAndTriggered = false;
     }
+
 }

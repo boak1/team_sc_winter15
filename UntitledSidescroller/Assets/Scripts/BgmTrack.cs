@@ -29,4 +29,5 @@ public class BgmTrack : MonoBehaviour {
             return currentIndex + 1;
         }
     }
+
 }
