@@ -21,7 +21,7 @@ public class EnemyWaypointMovement : MonoBehaviour {
 
     //void OnCollisionEnter2D(Collision2D hit)
     //{
-    //    if (hit.gameObject.name.Contains("Waypoint"))            
+    //    if (hit.gameObject.trackName.Contains("Waypoint"))            
     //    {
     //        Debug.Log("Hello");
     //        index++;

@@ -8,7 +8,7 @@ using System.Collections;
 
 public class BgmTrack : MonoBehaviour {
 
-    public string name;
+    public string trackName;
     public float tempo;
     public int numBeatsPerClip;
     public int startOfLoop = 0;                         // Index of the clip to loop back to once the last clip has finished

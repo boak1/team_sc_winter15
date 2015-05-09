@@ -26,7 +26,6 @@ public class BgmPlayer : MonoBehaviour {
     private float volume = 1.0f;
     private bool changeFlagOn = false;
     private bool fadeOutFlagOn = false;
-    private bool waitActive = false;
 
 	// Use this for initialization
 	void Start () 
@@ -38,9 +37,9 @@ public class BgmPlayer : MonoBehaviour {
             audioSources[i] = child.AddComponent<AudioSource>() as AudioSource;
         }
 
-        // Add key-value pairs for each track in trackList to be able to refer to them by name (string)
+        // Add key-value pairs for each track in trackList to be able to refer to them by trackName (string)
         foreach (BgmTrack track in trackList) {
-            trackDict.Add(track.name, track);
+            trackDict.Add(track.trackName, track);
         }
 
         currentTrack = trackDict[firstTrack];
@@ -74,7 +73,6 @@ public class BgmPlayer : MonoBehaviour {
     /* ------------------------------------------------------------------ */
 
     // Resets audio volume to full and starts playback of new track immediately
-    // Called by BgmChangeTrack objects
     public void SwitchTrack (string trackName)
     {
         changeFlagOn = true;
@@ -95,30 +93,38 @@ public class BgmPlayer : MonoBehaviour {
         changeFlagOn = false;
     }
 
-    // Fades the currently playing track out and then plays trackName
+    // Fades the currently playing track out and then runs SwitchTrack
+    // This is the only way I could figure out how to delay SwitchTrack's execution
     public void FadeAndSwitchTrack(string trackName, float fadeOutStep, float fadeOutSpeed)
     {
-        FadeOut(fadeOutStep, fadeOutSpeed);
+        StartCoroutine(FadeOut(fadeOutStep, fadeOutSpeed));
+        StartCoroutine(SwitchTrackCoroutine(trackName));
+    }
+
+    // IEnumerator wrapper for SwitchTrack that does an empty loop until fadeOutFlagOn becomes false
+    public IEnumerator SwitchTrackCoroutine(string trackName)
+    {
+        while (fadeOutFlagOn)
+        {
+            yield return null;  // There has to be a better way than this
+        }
         SwitchTrack(trackName);
     }
 
     // Decreases volume of both audioSources by -step every speed seconds until volume == 0.0f
-    // TODO: figure out why fading out only happens when Debug.Log is called
-    // TODO: when Debug.Log is called, game freezes while fadeout is happening. May have to use coroutines
-    public void FadeOut (float step, float speed)
+    // Use smaller values for smoother fades
+    // TODO: instead of step and speed, have "length of fadeout in seconds" as a parameter
+    public IEnumerator FadeOut (float step, float speed)
     {
         fadeOutFlagOn = true;
-        float timeElapsed = 0.0f;
-        fadeOutFlagOn = true;
+        //float timeElapsed = 0.0f;
         while (volume > 0.0f)
         {
-            timeElapsed += Time.deltaTime;
+            //timeElapsed += Time.deltaTime;
             // Debug.Log(timeElapsed);
-            if (timeElapsed >= speed)
-            {
-                ChangeVolume(-step);
-                timeElapsed = 0.0f;
-            }
+            ChangeVolume(-step);
+            Debug.Log("Lowered volume by " + step);
+            yield return new WaitForSeconds(speed);
         }
         fadeOutFlagOn = false;
     }
@@ -139,13 +145,6 @@ public class BgmPlayer : MonoBehaviour {
         volume = level;
         audioSources[0].volume = level;
         audioSources[1].volume = level;
-    }
-
-    private IEnumerator Wait(float seconds)
-    {
-        waitActive = true;
-        yield return new WaitForSeconds(seconds);
-        waitActive = false;
     }
 
 }
