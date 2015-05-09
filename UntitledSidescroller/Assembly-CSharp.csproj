@@ -47,14 +47,17 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\FadeOutFlag.cs" />
-     <Compile Include="Assets\PlatformDisappearBehavior.cs" />
-     <Compile Include="Assets\PlatformTeleportBehavior.cs" />
      <Compile Include="Assets\Scripts\BgmChangeFlag.cs" />
      <Compile Include="Assets\Scripts\BgmPlayer.cs" />
+     <Compile Include="Assets\Scripts\BgmPlayerModular.cs" />
+     <Compile Include="Assets\Scripts\BgmTrack.cs" />
+     <Compile Include="Assets\Scripts\CagedPlatformBehavior.cs" />
+     <Compile Include="Assets\Scripts\CagedPlatformButtonBehavior.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CameraStartTrigger.cs" />
      <Compile Include="Assets\Scripts\CameraVisibleTurn.cs" />
      <Compile Include="Assets\Scripts\CheckpointTrigger.cs" />
+     <Compile Include="Assets\Scripts\EnemyBecomesPlatformOnDeathBehavior.cs" />
      <Compile Include="Assets\Scripts\EnemyHomingMovement.cs" />
      <Compile Include="Assets\Scripts\EnemyPreferences.cs" />
      <Compile Include="Assets\Scripts\EnemyStandardMovement.cs" />
@@ -63,10 +66,12 @@
      <Compile Include="Assets\Scripts\GameOver.cs" />
      <Compile Include="Assets\Scripts\GameWin.cs" />
      <Compile Include="Assets\Scripts\Mirror.cs" />
+     <Compile Include="Assets\Scripts\PlatformDisappearBehavior.cs" />
      <Compile Include="Assets\Scripts\PlatformFallingBehavior.cs" />
      <Compile Include="Assets\Scripts\PlatformMapper.cs" />
      <Compile Include="Assets\Scripts\PlatformMovement.cs" />
      <Compile Include="Assets\Scripts\PlatformProperties.cs" />
+     <Compile Include="Assets\Scripts\PlatformTeleportBehavior.cs" />
      <Compile Include="Assets\Scripts\PlatformWaypointMovement.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
