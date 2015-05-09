@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BgmChangeFlag : MonoBehaviour {
+/// <summary>
+/// Code by Vincent
+/// Generic flag that changes music once flag enters camera view
+/// </summary>
+
+public class BgmChangeTrack : MonoBehaviour {
     private BgmPlayer bgmPlayer;
     private bool becameVisibleAndTriggered = false;
     public string trackName;
@@ -11,12 +16,11 @@ public class BgmChangeFlag : MonoBehaviour {
         bgmPlayer = GameObject.Find("BgmPlayer").GetComponent<BgmPlayer>();
 	}
 
-    //for some reason, this method seems to be called more than once after flag enters camera view
+    // For some reason, this method seems to be called more than once after flag enters camera view
     void OnBecameVisible ()
     {
         if (!becameVisibleAndTriggered)
         {
-            //Debug.Log("called SwitchTrack()");
             bgmPlayer.SwitchTrack(trackName);
             becameVisibleAndTriggered = true;
         }

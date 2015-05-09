@@ -6,11 +6,10 @@ using System.Collections.Generic;
 /// 
 /// TODO: test EVERYTHING
 /// TODO: make fade out work
-/// TODO: refactor this so that it doesn't require hardcoded track information
 /// </summary>
 
 [RequireComponent(typeof(AudioSource))]
-public class BgmPlayerModular : MonoBehaviour {
+public class BgmPlayerOldDoNotUse : MonoBehaviour {
 
     public AudioClip[] bgmClips = new AudioClip[2];
     public float bgmStartDelayInSeconds = 0.0f;
@@ -41,7 +40,7 @@ public class BgmPlayerModular : MonoBehaviour {
         currentTrack = firstTrack;
         UpdateTrackSettings(currentTrack, true);
 
-        //initialize trackList dictionary for Pirate Mountain (is there an easier way to do array slices?)
+        //initialize trackDict dictionary for Pirate Mountain (is there an easier way to do array slices?)
         //this is where generic BgmTrack objects would be instantiated and initialized
         trackList.Add("village", new AudioClip[1] {bgmClips[0]});
         trackList.Add("cave", new AudioClip[2] {bgmClips[1], bgmClips[2]});

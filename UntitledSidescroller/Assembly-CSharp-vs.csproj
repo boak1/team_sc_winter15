@@ -46,10 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\FadeOutFlag.cs" />
-     <Compile Include="Assets\Scripts\BgmChangeFlag.cs" />
+     <Compile Include="Assets\Scripts\BgmChangeTrack.cs" />
      <Compile Include="Assets\Scripts\BgmPlayer.cs" />
-     <Compile Include="Assets\Scripts\BgmPlayerModular.cs" />
+     <Compile Include="Assets\Scripts\BgmPlayerOldDoNotUse.cs" />
      <Compile Include="Assets\Scripts\BgmTrack.cs" />
      <Compile Include="Assets\Scripts\CagedPlatformBehavior.cs" />
      <Compile Include="Assets\Scripts\CagedPlatformButtonBehavior.cs" />
