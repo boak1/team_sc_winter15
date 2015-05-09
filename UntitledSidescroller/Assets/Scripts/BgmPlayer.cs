@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /// Music player for Pirate Mountain
 /// 
 /// TODO: test EVERYTHING
-/// TODO: switching tracks works, but now looping doesn't
+/// TODO: make fade out work
 /// </summary>
 
 [RequireComponent(typeof(AudioSource))]
@@ -53,7 +53,6 @@ public class BgmPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-
         	double time = AudioSettings.dspTime;
 
         if (time + 1.0f > nextEventTime)
@@ -65,8 +64,9 @@ public class BgmPlayer : MonoBehaviour {
             if (!changeFlagOn)
             {
                 UpdateTrackSettings(currentTrack);
-                //changeFlagOn = false;
             }
+
+
 
             nextEventTime += 60.0f / bgmTempo * numBeatsPerSegment;
             Debug.Log("Scheduled clip " + index + " to AudioSource " + flip + " at start at time " + nextEventTime);
@@ -80,18 +80,12 @@ public class BgmPlayer : MonoBehaviour {
     
 
     //Resets audio volume and starts playback of new track immediately
-    public void SwitchTrack (string trackName, bool fadeOut = false)
+    public void SwitchTrack (string trackName)
     {
         changeFlagOn = true;
 
-        if (fadeOut)
-        {
-            //TODO: call FadeOut() somewhere in this class and calculate nextEventTime to account for fadeout time
-        }
-        else
-        {
-            audioSources[1 - flip].Stop();
-        }
+        audioSources[1 - flip].Stop();
+
         volume = 1.0f;
         audioSources[0].volume = volume;
         audioSources[1].volume = volume;
@@ -126,22 +120,25 @@ public class BgmPlayer : MonoBehaviour {
                 index = GetNextIndexCave(index, playFromStart);
                 break;
             case "boss":
-                bgmTempo = 169.333f;    //TODO: reexport clips at 255 apparent bpm so that this becomes 170.0f
+                bgmTempo = 170.3f;    
                 numBeatsPerSegment = 32;
                 index = GetNextIndexBoss(index, playFromStart);
                 break;
         }
     }
 
-
-    void FadeOut ()
+    //Decreases volume of both audioSources by 0.1 every call until volume equals 0.1
+    //Returns true if the volume was decreased and false if the volume is already 0.1
+    public bool FadeOut ()
     {
         if (volume > 0.1f)
         {
             volume -= 0.1f * (float)AudioSettings.dspTime;
             audioSources[0].volume = volume;
             audioSources[1].volume = volume;
+            return true;
         }
+        return false;
     }
 
     /*----------------------------------------------------*/
@@ -179,7 +176,7 @@ public class BgmPlayer : MonoBehaviour {
             return 0;
         }
 
-        if (currentIndex + 1 == 8) 
+        if (currentIndex + 1 > 7) 
         {
             return 1;
         } 
