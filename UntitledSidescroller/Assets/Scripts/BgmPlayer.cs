@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 /// <summary>
 /// Code by Vincent
-/// Generic music player for levels 
-/// Uses BgmTrack objects
-/// 
-/// TODO: make fade out work
+/// Generic music player for levels, uses BgmTrack objects.
+/// Supports multiple tracks in a single level using BgmChangeTrack objects.
 /// </summary>
 
 [RequireComponent(typeof(AudioSource))]
@@ -37,7 +35,7 @@ public class BgmPlayer : MonoBehaviour {
             audioSources[i] = child.AddComponent<AudioSource>() as AudioSource;
         }
 
-        // Add key-value pairs for each track in trackList to be able to refer to them by trackName (string)
+        // Add key-value pairs for each track in trackList to be able to refer to them by name
         foreach (BgmTrack track in trackList) {
             trackDict.Add(track.trackName, track);
         }
@@ -58,7 +56,7 @@ public class BgmPlayer : MonoBehaviour {
             audioSources[flip].clip = currentTrack.clipList[index];
             audioSources[flip].PlayScheduled(nextEventTime);
 
-            // Prevent Update from interfering while SwitchTrack is executing; possibly redundant
+            // Prevent Update from interfering if a switchTrack flag is somehow triggered at the same time as this
             if (!changeFlagOn)
             {
                 index = currentTrack.GetNextClipIndex(index);
@@ -95,9 +93,9 @@ public class BgmPlayer : MonoBehaviour {
 
     // Fades the currently playing track out and then runs SwitchTrack
     // This is the only way I could figure out how to delay SwitchTrack's execution
-    public void FadeAndSwitchTrack(string trackName, float fadeOutStep, float fadeOutSpeed)
+    public void FadeAndSwitchTrack(string trackName, float fadeOutLength, float fadeOutStep)
     {
-        StartCoroutine(FadeOut(fadeOutStep, fadeOutSpeed));
+        StartCoroutine(FadeOut(fadeOutLength, fadeOutStep));
         StartCoroutine(SwitchTrackCoroutine(trackName));
     }
 
@@ -111,20 +109,16 @@ public class BgmPlayer : MonoBehaviour {
         SwitchTrack(trackName);
     }
 
-    // Decreases volume of both audioSources by -step every speed seconds until volume == 0.0f
+    // Decreases volume of both audioSources to 0.0f within length seconds with 
     // Use smaller values for smoother fades
-    // TODO: instead of step and speed, have "length of fadeout in seconds" as a parameter
-    public IEnumerator FadeOut (float step, float speed)
+    public IEnumerator FadeOut (float length, float step = 0.01f)
     {
         fadeOutFlagOn = true;
-        //float timeElapsed = 0.0f;
         while (volume > 0.0f)
         {
-            //timeElapsed += Time.deltaTime;
-            // Debug.Log(timeElapsed);
             ChangeVolume(-step);
-            Debug.Log("Lowered volume by " + step);
-            yield return new WaitForSeconds(speed);
+            // Debug.Log("Lowered volume by " + step);
+            yield return new WaitForSeconds(length * step);
         }
         fadeOutFlagOn = false;
     }

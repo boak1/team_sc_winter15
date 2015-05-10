@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Adds a platform
     /// </summary>
-    /// <param trackName="platform"></param>
+    /// <param newTrackName="platform"></param>
     //public void AddPlatform (GameObject platform) {
     //    platformList.Add (platform);
     //}
@@ -85,8 +85,8 @@ public class GameManager : MonoBehaviour
     /// @@@!!! Currently only by x coordinates of platforms and ascending from the left - just add a boolean once we implement vertical !!!@@@
     /// @@@!!! Turns out we have to implement booleans if we want to go right and opposite directions !!!@@@
     /// </summary>
-    /// <param trackName="object1"></param>
-    /// <param trackName="object2"></param>
+    /// <param newTrackName="object1"></param>
+    /// <param newTrackName="object2"></param>
     //private static int CompareByCoordinates(GameObject object1, GameObject object2)
     //{
     //    return object1.transform.position.x.CompareTo(object2.transform.position.x);

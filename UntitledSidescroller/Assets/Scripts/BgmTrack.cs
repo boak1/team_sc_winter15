@@ -3,7 +3,7 @@ using System.Collections;
 
 /// <summary>
 /// Code by Vincent
-/// Generic class for music tracks
+/// Generic class for music tracks and their clips.
 /// </summary>
 
 public class BgmTrack : MonoBehaviour {
