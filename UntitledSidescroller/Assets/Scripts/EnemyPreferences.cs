@@ -16,14 +16,15 @@ public class EnemyPreferences : MonoBehaviour {
     public enum COLOR { BLANK, RED, GREEN, BLUE, INDESTRUCTIBLE };
     public COLOR initColor; 
 	public bool killOffScreen = true;
-	public bool givesHp, diesOnContact = true;
+	public bool givesHp, diesOnContact = true, shoots = false;
 	public int contactDamage = 1, hp4Kill = 1, enemyHP = 1;
     public SfxPlayer sfxPlayer;
-    ShootingScript SS; 
+    ShootingScript SS;    
 
     void Start()
     {
         SS = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();  //Import ShootingScript
+        this.GetComponent<EnemyShooting>().enabled = shoots;
     }
     void OnBecameVisible()
     {
