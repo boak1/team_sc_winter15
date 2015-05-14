@@ -13,14 +13,14 @@ public class BgmPlayer : MonoBehaviour {
 
     public float bgmStartDelayInSeconds = 0.0f;
     public string firstTrack;
-    public BgmTrack[] trackList = new BgmTrack[1];  // You can change the size of this list in the Unity editor
+    public BgmTrack[] trackList = new BgmTrack[0];  // You can change the size of this list in the Unity editor
 
     private BgmTrack currentTrack;
     private Dictionary<string, BgmTrack> trackDict = new Dictionary<string, BgmTrack>(); 
     private int index;
     private int flip = 0;
     private double nextEventTime;
-    private AudioSource[] audioSources = new AudioSource[0];
+    private AudioSource[] audioSources = new AudioSource[2];
     private float volume = 1.0f;
     private bool changeFlagOn = false;
     private bool fadeOutFlagOn = false;
