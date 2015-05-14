@@ -6,8 +6,8 @@ public class PlatformProperties : MonoBehaviour {
     public bool teleportable = true;
 	public bool spinning = false;
 	public float degreeSpin = 50.0f;
-	public bool vertical = false;
-	public bool upsideDown = false;
+	public float platformTilt = 0.0f;
+	public bool tilted = false;
 
 	public bool getTeleportable ()
     {
@@ -23,15 +23,11 @@ public class PlatformProperties : MonoBehaviour {
 		//check platform orientation
 		if (spinning)
 			transform.Rotate (0,0,degreeSpin * Time.deltaTime);
-		if(vertical)
+		if(tilted)
 		{
-			transform.Rotate(0,0,90);
-			vertical = false;
+			transform.Rotate(0,0,platformTilt);
+			tilted = false;
 		}
-		if (upsideDown) 
-		{
-			transform.Rotate(0,0,180);
-			upsideDown = false;
-		}
+
 	}
 }
