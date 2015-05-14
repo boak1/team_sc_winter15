@@ -20,7 +20,7 @@ public class BgmPlayer : MonoBehaviour {
     private int index;
     private int flip = 0;
     private double nextEventTime;
-    private AudioSource[] audioSources = new AudioSource[2];
+    private AudioSource[] audioSources = new AudioSource[0];
     private float volume = 1.0f;
     private bool changeFlagOn = false;
     private bool fadeOutFlagOn = false;
