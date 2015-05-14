@@ -36,6 +36,12 @@ public class BgmPlayer : MonoBehaviour {
         }
 
         // Add key-value pairs for each track in trackList to be able to refer to them by name
+        if (trackList.Length == 0)
+        {
+            Debug.Log("No bgm has been added to this scene yet.");
+            return;
+        }
+
         foreach (BgmTrack track in trackList) {
             trackDict.Add(track.trackName, track);
         }
@@ -49,7 +55,12 @@ public class BgmPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        	double time = AudioSettings.dspTime;
+        if (trackList.Length == 0)
+        {
+            return;
+        }
+
+        double time = AudioSettings.dspTime;
 
         if (time + 1.0f > nextEventTime)
         {

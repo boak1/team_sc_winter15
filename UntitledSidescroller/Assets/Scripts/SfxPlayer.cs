@@ -12,17 +12,15 @@ public class SfxPlayer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        if (soundDict.Count == 0)
+        {
+            return;
+        }
         // Set up the dictionary from the list of sound effects
         foreach (AudioClip clip in soundEffects)
         {
             soundDict.Add(clip.name, clip);
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
 	}
 
     // When called, loads the specified sound effect into the AudioSource and plays it
