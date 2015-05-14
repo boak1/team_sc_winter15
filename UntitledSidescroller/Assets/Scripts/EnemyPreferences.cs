@@ -47,16 +47,15 @@ public class EnemyPreferences : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D hit)
     {
 			if (hit.gameObject.name == "Player") {
-						PlayerHealth.hp -= contactDamage;
-						if (diesOnContact)
-								Destroy (this.gameObject);
+				PlayerHealth.hp -= contactDamage;
+				if (diesOnContact)
+						Destroy (this.gameObject);
+                sfxPlayer.PlaySfx("Hit_Hurt_loud");
 			}
 
 			if(enemyHP <= 0){
 				Destroy(this.gameObject);
-			}
-
-            sfxPlayer.PlaySfx("Hit_Hurt_loud");
+			}            
 	}
 
 
