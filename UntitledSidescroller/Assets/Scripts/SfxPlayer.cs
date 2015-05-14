@@ -8,11 +8,11 @@ public class SfxPlayer : MonoBehaviour {
     public AudioSource audioSource;
 
     private Dictionary<string, AudioClip> soundDict = new Dictionary<string, AudioClip>();
-    public AudioClip[] soundEffects = new AudioClip[4];
+    public AudioClip[] soundEffects = new AudioClip[0];
 
 	// Use this for initialization
 	void Start () {
-        if (soundDict.Count == 0)
+        if (soundEffects.Length == 0)
         {
             return;
         }
