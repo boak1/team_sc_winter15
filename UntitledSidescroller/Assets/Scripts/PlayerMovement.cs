@@ -94,8 +94,9 @@ public class PlayerMovement : MonoBehaviour {
 			sfxPlayer.PlaySfx("teleport"); //play teleport sound effect
 
 
-		old_x = this.transform.position.x;        
-		transform.position = (currentPlatform).transform.position + new Vector3(0f, .87f, 0f);
+		old_x = this.transform.position.x;
+        transform.position = (currentPlatform).transform.position;
+        transform.rotation = currentPlatform.transform.rotation;
         if (this.transform.position.x < old_x)
         {                     
             this.transform.localScale = new Vector3(-player_scale.x, player_scale.y, player_scale.z);
