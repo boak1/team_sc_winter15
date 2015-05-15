@@ -18,13 +18,15 @@ public class EnemyPreferences : MonoBehaviour {
 	public bool killOffScreen = true;
 	public bool givesHp, diesOnContact = true, shoots = false;
 	public int contactDamage = 1, hp4Kill = 1, enemyHP = 1;
-    public SfxPlayer sfxPlayer;
+    private SfxPlayer sfxPlayer;
     ShootingScript SS;    
 
     void Start()
     {
         SS = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();  //Import ShootingScript
-        this.GetComponent<EnemyShooting>().enabled = shoots;
+        sfxPlayer = GameObject.Find("SfxPlayer").GetComponent<SfxPlayer>();
+        if (this.GetComponent<EnemyShooting>() != null)
+            this.GetComponent<EnemyShooting>().enabled = shoots;
     }
     void OnBecameVisible()
     {
@@ -44,19 +46,19 @@ public class EnemyPreferences : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D(Collision2D hit)
-    {
-			if (hit.gameObject.name == "Player") {
-				PlayerHealth.hp -= contactDamage;
-				if (diesOnContact)
-						Destroy (this.gameObject);
-                sfxPlayer.PlaySfx("Hit_Hurt_loud");
-			}
+    //void OnCollisionEnter2D(Collision2D hit)
+    //{
+    //        if (hit.gameObject.name == "Player") {
+    //            PlayerHealth.hp -= contactDamage;
+    //            if (diesOnContact)
+    //                    Destroy (this.gameObject);
+    //            sfxPlayer.PlaySfx("Hit_Hurt_loud");
+    //        }
 
-			if(enemyHP <= 0){
-				Destroy(this.gameObject);
-			}            
-	}
+    //        if(enemyHP <= 0){
+    //            Destroy(this.gameObject);
+    //        }    
+    //}
 
 
 	public void tookDamage(){

@@ -57,7 +57,6 @@
      <Compile Include="Assets\Scripts\CameraVisibleTurn.cs" />
      <Compile Include="Assets\Scripts\CheckpointTrigger.cs" />
      <Compile Include="Assets\Scripts\EnemyBecomesPlatformOnDeathBehavior.cs" />
-     <Compile Include="Assets\Scripts\EnemyBulletScript.cs" />
      <Compile Include="Assets\Scripts\EnemyHomingMovement.cs" />
      <Compile Include="Assets\Scripts\EnemyPreferences.cs" />
      <Compile Include="Assets\Scripts\EnemyShooting.cs" />
@@ -76,6 +75,8 @@
      <Compile Include="Assets\Scripts\PlatformWaypointMovement.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\PlayerProperties.cs" />
+     <Compile Include="Assets\Scripts\ProjectileProperties.cs" />
      <Compile Include="Assets\Scripts\SfxPlayer.cs" />
      <Compile Include="Assets\Scripts\ShootingScript.cs" />
      <Compile Include="Assets\Scripts\ShootingTutorial.cs" />
