@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
         {
             spriteRendererH.sprite = oneHP; // change the sprite to 1 hp
         }
-        else if (hpTest == 0)
+        else if (hpTest <= 0)
         {
             GameManager.gameOver();
         }

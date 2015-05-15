@@ -22,7 +22,7 @@ public class PlayerProperties : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
         if (hitInfo.CompareTag("Enemy")){
-            PlayerHealth.hp--;            
+            PlayerHealth.hp -= hitInfo.gameObject.GetComponent<ProjectileProperties>().damage;            
             sfxPlayer.PlaySfx("Hit_Hurt_loud");
         }
     }
