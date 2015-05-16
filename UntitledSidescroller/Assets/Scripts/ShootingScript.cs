@@ -59,13 +59,13 @@ public class ShootingScript : MonoBehaviour {
 	public bool isEnemyNull(EnemyPreferences.COLOR c)
 	{
 		if (c == EnemyPreferences.COLOR.RED)
-						return (redTarget == null);
+			return (redTarget == null);
 		else if (c == EnemyPreferences.COLOR.BLUE)
-						return (blueTarget == null);
+			return (blueTarget == null);
 		else if (c == EnemyPreferences.COLOR.GREEN)
-						return (greenTarget == null);
-				else
-						return true;
+			return (greenTarget == null);
+		else
+		    return true;
 
 	}
     void FixedUpdate()
@@ -124,7 +124,6 @@ public class ShootingScript : MonoBehaviour {
             }
             else if (collider.CompareTag("Button"))
             {
-                Debug.Log("Test");
                 collider.GetComponentInParent<CagedPlatformButtonBehavior>().toggleButton();
             }
 
