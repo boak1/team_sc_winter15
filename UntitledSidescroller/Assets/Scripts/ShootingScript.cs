@@ -104,20 +104,30 @@ public class ShootingScript : MonoBehaviour {
             lineDict[target].SetPosition(0, this.transform.position);
             lineDict[target].SetPosition(1, hits[0].point);
             Invoke(resetDict[lineDict[target]], 1f);
-            if (hits[0].collider.CompareTag("Enemy"))
+
+            Collider2D collider = hits[0].collider;
+
+            if (collider.CompareTag("Enemy"))
             {
-				EnemyPreferences hitEnemy;
-				hitEnemy = hits[0].collider.gameObject.GetComponentInParent<EnemyPreferences>();
-				hitEnemy.tookDamage();
+				//EnemyPreferences hitEnemy;
+				//hitEnemy = collider.gameObject.GetComponentInParent<EnemyPreferences>().tookDamage();
+                collider.gameObject.GetComponentInParent<EnemyPreferences>().tookDamage();
+				//hitEnemy.tookDamage();
                // Destroy(hits[0].collider.gameObject);
             }
-            if (hits[0].collider.CompareTag("Mirror"))
+            else if (collider.CompareTag("Mirror"))
             {
                 //lineDict[target].SetVertexCount(defaultVertexCount+1);
                 Vector3 pos = Vector3.Reflect((Vector3)hits[0].point - this.transform.position, hits[0].normal);
                 //lineDict[target].SetPosition(2, pos);
-                hits[0].collider.GetComponent<Mirror>().Shoot(hits[0].point, pos, colorDict[lineDict[target]]);
+                collider.GetComponent<Mirror>().Shoot(hits[0].point, pos, colorDict[lineDict[target]]);
             }
+            else if (collider.CompareTag("Button"))
+            {
+                Debug.Log("Test");
+                collider.GetComponentInParent<CagedPlatformButtonBehavior>().toggleButton();
+            }
+
         }
     }
 

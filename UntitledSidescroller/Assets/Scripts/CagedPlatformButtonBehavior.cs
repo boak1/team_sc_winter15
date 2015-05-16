@@ -5,9 +5,14 @@ public class CagedPlatformButtonBehavior : MonoBehaviour {
 
     public GameObject platform;
 
-    void OnDestroy()
+    public void toggleButton()
     {
-        Debug.Log("test");
-        platform.GetComponent<CagedPlatformBehavior>().addCage();
+        CagedPlatformBehavior platformScript = platform.GetComponent<CagedPlatformBehavior>();
+
+        bool caged = platformScript.isCaged();
+        if (caged)
+            platformScript.removeCage();
+        else
+            platformScript.addCage();
     }
 }
