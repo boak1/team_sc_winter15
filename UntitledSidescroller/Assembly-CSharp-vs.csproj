@@ -81,6 +81,8 @@
      <Compile Include="Assets\Scripts\ShootingScript.cs" />
      <Compile Include="Assets\Scripts\ShootingTutorial.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
+     <Compile Include="Assets\Scripts\Targetable.cs" />
+     <Compile Include="Assets\Scripts\colorchanger.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
