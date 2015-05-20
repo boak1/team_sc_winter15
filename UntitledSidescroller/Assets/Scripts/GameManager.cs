@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     {
         CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();   
 		PM = GameObject.Find("Player").GetComponent<PlayerMovement>();
-		PM.currentPlatform = PM.startPlatform;
 
     }
     public static void gameOver()
@@ -36,7 +35,6 @@ public class GameManager : MonoBehaviour
                                     PlayerPrefs.GetFloat("CheckpointZ"));
             CM.speed = new Vector2(PlayerPrefs.GetFloat("CameraSpeedX"), PlayerPrefs.GetFloat("CameraSpeedY"));
             CM.direction = CM.stringToDirection(PlayerPrefs.GetString("CameraDirection"));
-			PM.currentPlatform = PM.startPlatform;
         }
     }
 }

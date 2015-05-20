@@ -28,7 +28,6 @@ public class CheckpointTrigger : MonoBehaviour {
             PlayerPrefs.SetString("CameraDirection", CM.getCurrentDirection());
             PlayerPrefs.SetFloat("CameraSpeedX", CM.getCurrentSpeed().x);
             PlayerPrefs.SetFloat("CameraSpeedY", CM.getCurrentSpeed().y);
-			PM.startPlatform = checkpointPlatform;
         }
     }
 }

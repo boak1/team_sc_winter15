@@ -13,30 +13,54 @@ public class PlatformMapper : MonoBehaviour
     CameraMovement CM;
     PlayerMovement PM;
 	int shouldUpdate = 0; //used to stagger updates
+
+	bool firstUpdate = true;
+
     void Start()
     {
-        CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();
-        PM = GameObject.Find("Player").GetComponent<PlayerMovement>();
-		if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right ||
-		    CM.direction == CameraMovement.Direction.UpLeft || CM.direction == CameraMovement.Direction.UpRight ||
-		    CM.direction == CameraMovement.Direction.DownLeft || CM.direction == CameraMovement.Direction.DownRight)
-			platformList.Sort(CompareX);
-		else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
-			platformList.Sort(CompareY);
-    }
+		CM = GameObject.Find ("CameraMovement").GetComponent<CameraMovement> ();
+		PM = GameObject.Find ("Player").GetComponent<PlayerMovement> ();
 
+	}
+		
 	void Update(){
-		if (shouldUpdate == 3) {
-			shouldUpdate = -1;
+		if (firstUpdate) {
+			GameObject[] platformHolder = GameObject.FindGameObjectsWithTag ("Platform"); 
+			
+			List<GameObject> ph = new List<GameObject> ();
+			
+			ph.AddRange (platformHolder);
+			for (int x = 0; x < platformHolder.Length; x++)
+				if (!(platformHolder [x].GetComponent<Renderer> ().isVisible))
+					ph.Remove (platformHolder [x]);
+			
+			
 			if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right ||
-			    CM.direction == CameraMovement.Direction.UpLeft || CM.direction == CameraMovement.Direction.UpRight ||
-			    CM.direction == CameraMovement.Direction.DownLeft || CM.direction == CameraMovement.Direction.DownRight)
-				platformList.Sort(CompareX);
+				CM.direction == CameraMovement.Direction.UpLeft || CM.direction == CameraMovement.Direction.UpRight ||
+				CM.direction == CameraMovement.Direction.DownLeft || CM.direction == CameraMovement.Direction.DownRight)
+				ph.Sort (CompareX);
 			else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
-				platformList.Sort(CompareY);
+				ph.Sort (CompareY);
+			platformList = ph;
+			if(platformList.Count > 0)
+				PM.currentPlatform = platformList [0];
+			else
+				PM.currentPlatform = null;
+
+			if (PM.currentPlatform != null)
+				firstUpdate = false;
+		} else {
+			if (shouldUpdate == 3) {
+				shouldUpdate = -1;
+				if (CM.direction == CameraMovement.Direction.Left || CM.direction == CameraMovement.Direction.Right ||
+					CM.direction == CameraMovement.Direction.UpLeft || CM.direction == CameraMovement.Direction.UpRight ||
+					CM.direction == CameraMovement.Direction.DownLeft || CM.direction == CameraMovement.Direction.DownRight)
+					platformList.Sort (CompareX);
+				else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
+					platformList.Sort (CompareY);
+			}
+			shouldUpdate++;
 		}
-		shouldUpdate++;
-	
 	}
 
     /// <summary>
