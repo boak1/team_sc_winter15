@@ -26,7 +26,7 @@ public class EnemyPreferences : MonoBehaviour {
         SS = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();  //Import ShootingScript
         sfxPlayer = GameObject.Find("SfxPlayer").GetComponent<SfxPlayer>();
         if (this.GetComponent<EnemyShooting>() != null)
-            this.GetComponent<EnemyShooting>().enabled = shoots;
+            this.GetComponent<EnemyShooting>().enabled = false;
     }
     void OnBecameVisible()
     {
@@ -44,22 +44,10 @@ public class EnemyPreferences : MonoBehaviour {
                 SS.setBlueTarget(this.gameObject);
                 break;
         }
+
+        if (this.GetComponent<EnemyShooting>() != null)
+            this.GetComponent<EnemyShooting>().enabled = shoots;
     }
-
-    //void OnCollisionEnter2D(Collision2D hit)
-    //{
-    //        if (hit.gameObject.name == "Player") {
-    //            PlayerHealth.hp -= contactDamage;
-    //            if (diesOnContact)
-    //                    Destroy (this.gameObject);
-    //            sfxPlayer.PlaySfx("Hit_Hurt_loud");
-    //        }
-
-    //        if(enemyHP <= 0){
-    //            Destroy(this.gameObject);
-    //        }    
-    //}
-
 
 	public void tookDamage(){
 		if(initColor != COLOR.INDESTRUCTIBLE){
@@ -72,8 +60,11 @@ public class EnemyPreferences : MonoBehaviour {
 	
 	void OnBecameInvisible()
 	{
+        shoots = false;
+        if (this.GetComponent<EnemyShooting>() != null)
+            this.GetComponent<EnemyShooting>().enabled = shoots;
 		if(killOffScreen)
-		Destroy (this.gameObject);
+		    Destroy (this.gameObject);
 	}
 
 
@@ -89,4 +80,18 @@ public class EnemyPreferences : MonoBehaviour {
 			}
 		}
 	}
+
+    //void OnCollisionEnter2D(Collision2D hit)
+    //{
+    //        if (hit.gameObject.name == "Player") {
+    //            PlayerHealth.hp -= contactDamage;
+    //            if (diesOnContact)
+    //                    Destroy (this.gameObject);
+    //            sfxPlayer.PlaySfx("Hit_Hurt_loud");
+    //        }
+
+    //        if(enemyHP <= 0){
+    //            Destroy(this.gameObject);
+    //        }    
+    //}
 }

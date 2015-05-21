@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyShooting : MonoBehaviour {
 
-    public float timeBetweenShots = 5f, projectileSpeed = 1f;
+    public float timeBetweenShots = 3f, projectileSpeed = 3f;
     public int projectileDamage = 1;
     private float cooldownTimer = 3f;    
     public GameObject projectilePrefab;
@@ -25,8 +25,8 @@ public class EnemyShooting : MonoBehaviour {
             angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             GameObject projectile = (GameObject)Instantiate(projectilePrefab.gameObject, this.transform.position + this.transform.forward, 
                 Quaternion.AngleAxis(angle, new Vector3(0, 0, 1)));
-
-            projectile.GetComponent<ProjectileProperties>().Init(projectileSpeed, projectileDamage, dir);
+            Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
+            projectile.GetComponent<ProjectileProperties>().Init(projectileSpeed, projectileDamage, dir.normalized);
             cooldownTimer = timeBetweenShots;
         }        
 	}

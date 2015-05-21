@@ -6,8 +6,8 @@ public class ProjectileProperties : MonoBehaviour {
     public int damage = 1;
 
     void Start()
-    {
-        Destroy(this.gameObject, 5);
+    {        
+        Destroy(this.gameObject, 20);
     }
 
     public void Init(float speed, int damage, Vector3 direction)
@@ -15,13 +15,22 @@ public class ProjectileProperties : MonoBehaviour {
         this.damage = damage;
         this.GetComponent<Rigidbody2D>().velocity = new Vector2(speed * direction.x, speed * direction.y);
     }
-    //void OnTriggerEnter2D(Collider2D hitInfo)
-    //{
-    //    if (hitInfo.CompareTag("Enemy"))
-    //    {
-    //        return;
-    //    }
-    //    else
-    //        Destroy(this.gameObject);
-    //}
+
+    void OnCollisionEnter2D(Collision2D hitInfo)
+    {
+        Debug.Log("Here");
+        Destroy(this.gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        if (hitInfo.CompareTag("Player") || hitInfo.CompareTag("Platform") || hitInfo.CompareTag("Panel"))
+        {
+            Destroy(this.gameObject);
+        }
+        else if (hitInfo.tag.Contains("Enemy"))
+        {
+            return;
+        }
+    }
 }

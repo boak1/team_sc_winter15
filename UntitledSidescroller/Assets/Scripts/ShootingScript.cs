@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ShootingScript : MonoBehaviour {
     private Vector3 player_scale;
-    private int defaultVertexCount = 2;
+    //private int defaultVertexCount = 2;
     ///Holders for the LineRenderer GameObjects
     private LineRenderer redLaserLine;
     private LineRenderer greenLaserLine;
