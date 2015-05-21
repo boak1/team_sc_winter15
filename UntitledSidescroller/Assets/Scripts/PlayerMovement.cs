@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour {
         player_scale = this.transform.localScale;
         platMap = GameObject.Find("PlatformMapper").GetComponent<PlatformMapper>();
         CM = GameObject.Find("CameraMovement").GetComponent<CameraMovement>();        
-        transform.position = (currentPlatform).transform.position + new Vector3(0f, .87f, 0f);
+        transform.position = currentPlatform.transform.position + new Vector3(0f, .87f, 0f);
 
 
 		//sfxPlayer = GameObject.Find("Player").GetComponent<SfxPlayer>();
@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
 		old_x = this.transform.position.x;
-        transform.position = (currentPlatform).transform.position;
+        transform.position = currentPlatform.transform.position;
         transform.rotation = currentPlatform.transform.rotation;
         if (this.transform.position.x < old_x)
         {                     

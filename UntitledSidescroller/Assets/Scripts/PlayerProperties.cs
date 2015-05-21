@@ -17,12 +17,17 @@ public class PlayerProperties : MonoBehaviour {
                 Destroy(hitInfo.gameObject);
             sfxPlayer.PlaySfx("Hit_Hurt_loud");
         }            
+        //if (hitInfo.collider.CompareTag("Enemy Laser")){
+        //    PlayerHealth.hp -= hitInfo.gameObject.GetComponent<ProjectileProperties>().damage;           
+        //    sfxPlayer.PlaySfx("Hit_Hurt_loud");
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.CompareTag("Enemy")){
-            PlayerHealth.hp -= hitInfo.gameObject.GetComponent<ProjectileProperties>().damage;            
+        if (hitInfo.CompareTag("Enemy Laser"))
+        {
+            PlayerHealth.hp -= hitInfo.gameObject.GetComponent<ProjectileProperties>().damage;
             sfxPlayer.PlaySfx("Hit_Hurt_loud");
         }
     }
