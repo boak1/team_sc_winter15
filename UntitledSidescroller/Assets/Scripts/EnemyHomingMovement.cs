@@ -32,7 +32,7 @@ public class EnemyHomingMovement : MonoBehaviour {
         if (homing && visible)
         {
             float movex = pm.transform.position.x - transform.position.x;
-            float movey = pm.transform.position.y - transform.position.y;
+            float movey = (pm.transform.position.y + 1) - transform.position.y;
 
             transform.position = new Vector2(transform.position.x + (movex / Math.Abs(movex)) * speed, transform.position.y + (movey / Math.Abs(movey)) * speed);
         }	
