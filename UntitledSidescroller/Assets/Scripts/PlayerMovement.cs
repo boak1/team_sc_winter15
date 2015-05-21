@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour {
 	/// <summary>
 	/// Sfx player and stuff
 	/// </summary>
-	public SfxPlayer sfxPlayer;
+	private SfxPlayer sfxPlayer;
 
     void Start()
     {
@@ -31,8 +31,8 @@ public class PlayerMovement : MonoBehaviour {
         transform.position = currentPlatform.transform.position + new Vector3(0f, .87f, 0f);
 
 
-		//sfxPlayer = GameObject.Find("Player").GetComponent<SfxPlayer>();
-		//sfxPlayer = GetComponentInParent<SfxPlayer> ();
+        sfxPlayer = GameObject.Find("SfxPlayer").GetComponent<SfxPlayer>();
+        //sfxPlayer = GetComponentInParent<SfxPlayer>();
     }
 
     void Update()
