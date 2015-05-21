@@ -20,7 +20,7 @@ public class ShootingScript : MonoBehaviour {
 	public GameObject blueTarget;
 
 	/// Sound effects player (uses the global player)
-	public SfxPlayer sfxPlayer;
+	private SfxPlayer sfxPlayer;
     
 	public int laserDamage = 1;
 
@@ -35,6 +35,8 @@ public class ShootingScript : MonoBehaviour {
         redLaserLine = GameObject.Find("Player/PlayerShooting/RedLaserLineRenderer").GetComponent<LineRenderer>();
         greenLaserLine = GameObject.Find("Player/PlayerShooting/GreenLaserLineRenderer").GetComponent<LineRenderer>();
         blueLaserLine = GameObject.Find("Player/PlayerShooting/BlueLaserLineRenderer").GetComponent<LineRenderer>();
+
+        sfxPlayer = GameObject.Find("SfxPlayer").GetComponent<SfxPlayer>();
     }
 	
 	void Update () {

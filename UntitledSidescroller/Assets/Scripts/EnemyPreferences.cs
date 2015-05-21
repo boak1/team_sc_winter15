@@ -45,6 +45,7 @@ public class EnemyPreferences : MonoBehaviour {
                 break;
         }
 
+        ///Start shooting only when the player can see the enemy.
         if (this.GetComponent<EnemyShooting>() != null)
             this.GetComponent<EnemyShooting>().enabled = shoots;
     }
@@ -60,6 +61,7 @@ public class EnemyPreferences : MonoBehaviour {
 	
 	void OnBecameInvisible()
 	{
+        ///Stop shooting when the player can't see the enemy
         shoots = false;
         if (this.GetComponent<EnemyShooting>() != null)
             this.GetComponent<EnemyShooting>().enabled = shoots;
