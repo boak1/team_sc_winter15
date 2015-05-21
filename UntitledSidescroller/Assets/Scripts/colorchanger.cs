@@ -15,7 +15,7 @@ public class colorchanger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnTriggerEnter(Collider other) {
-		gameObject.GetComponent<Renderer>().material.color = colors [Random.Range (0, ColorSpace.Length)];
+		//gameObject.GetComponent<Renderer>().material.color = colors [Random.Range (0, ColorSpace.Length)];
 		
 	}
 }
