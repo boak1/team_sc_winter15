@@ -17,3 +17,18 @@ emerging from the cave, music fades out to silence
 scottish pirate metal starts once snowboard appears
 
 icy 
+
+-----------------------------------------------------
+Gorilla Casino, 1920s
+
+casino:
+	"20% of outside city"
+	have tom 2-step rhythm throughout
+	make it slowly fade in halfway between street and casino entrance
+		once player goes through the doors into casino, make suddenly 100% volume
+
+		start the track over somehow? or jump to beginning of the shout section
+
+boss:
+	
+	some chip
