@@ -3,15 +3,31 @@ using System.Collections;
 
 public class CagedPlatformBehavior : MonoBehaviour {
     public GameObject[] walls;
-
+    public float cageLifeTime = 5;
     public bool caged = false;
+
+    private float lifeTime;
 
     void Start()
     {
+        lifeTime = cageLifeTime;
+
         if (caged)
             addCage();
         else
             removeCage();
+    }
+
+    void Update()
+    {
+        if (isCaged())
+        {
+            lifeTime -= Time.deltaTime;
+            if (lifeTime <= 0.0f)
+                removeCage();
+        }
+        else
+            lifeTime = cageLifeTime;
     }
     
     public bool isCaged()
@@ -21,7 +37,6 @@ public class CagedPlatformBehavior : MonoBehaviour {
 
     public void addCage()
     {
-        Debug.Log("addCage");
         for (int i = 0; i < walls.Length; ++i)
             walls[i].SetActive(true);
 
@@ -30,7 +45,6 @@ public class CagedPlatformBehavior : MonoBehaviour {
 
     public void removeCage()
     {
-        Debug.Log("remCage");
         for (int i = 0; i < walls.Length; ++i)
             walls[i].SetActive(false);
 
