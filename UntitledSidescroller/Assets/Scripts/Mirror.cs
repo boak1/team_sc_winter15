@@ -6,6 +6,10 @@ public class Mirror : MonoBehaviour
 {
     static int antiInfLoop = 0;
 
+    public bool hasColor = false;
+    public enum COLOR { RED, GREEN, BLUE };
+    public COLOR mirrorColor;
+
     public GameObject redLaser;
     public GameObject greenLaser;
     public GameObject blueLaser;
@@ -14,17 +18,39 @@ public class Mirror : MonoBehaviour
     private LineRenderer greenLaserLine;
     private LineRenderer blueLaserLine;
 
+    private string mirrorColorStr;
+
     void Start()
     {
         redLaserLine = redLaser.GetComponent<LineRenderer>();
         greenLaserLine = greenLaser.GetComponent<LineRenderer>();
         blueLaserLine = blueLaser.GetComponent<LineRenderer>();
+
+        switch (mirrorColor)
+        {
+            case COLOR.RED:
+                mirrorColorStr = "redLaser";
+                break;
+            case COLOR.GREEN:
+                mirrorColorStr = "greenLaser";
+                break;
+            case COLOR.BLUE:
+                mirrorColorStr = "blueLaser";
+                break;
+        }
+
     }
 
     public void Shoot(Vector3 origin, Vector3 target, string color)
     {
-        if (++antiInfLoop > 1000)
+        
+        if (++antiInfLoop  > 1000)
             return;
+
+        //do not reflect if laser color does not match mirror color
+        if (hasColor && color != mirrorColorStr)
+            return;
+
         target = target * 10f;
         origin += (target - origin).normalized * 0.1f;
         Dictionary<LineRenderer, string> resetDict = new Dictionary<LineRenderer, string>{{redLaserLine, "resetRedLaserLine"},
