@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\CameraStartTrigger.cs" />
      <Compile Include="Assets\Scripts\CameraVisibleTurn.cs" />
      <Compile Include="Assets\Scripts\CheckpointTrigger.cs" />
+     <Compile Include="Assets\Scripts\ColoredGlass.cs" />
      <Compile Include="Assets\Scripts\EnemyBecomesPlatformOnDeathBehavior.cs" />
      <Compile Include="Assets\Scripts\EnemyHomingMovement.cs" />
      <Compile Include="Assets\Scripts\EnemyPreferences.cs" />

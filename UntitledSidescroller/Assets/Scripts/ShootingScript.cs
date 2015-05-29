@@ -110,19 +110,17 @@ public class ShootingScript : MonoBehaviour {
             Collider2D collider = hits[0].collider;
 
             if (collider.CompareTag("Enemy"))
-            {
-				//EnemyPreferences hitEnemy;
-				//hitEnemy = collider.gameObject.GetComponentInParent<EnemyPreferences>().tookDamage();
-                collider.gameObject.GetComponentInParent<EnemyPreferences>().tookDamage();
-				//hitEnemy.tookDamage();
-               // Destroy(hits[0].collider.gameObject);
+            {								
+                collider.gameObject.GetComponentInParent<EnemyPreferences>().tookDamage();				               
             }
             else if (collider.CompareTag("Mirror"))
-            {
-                //lineDict[target].SetVertexCount(defaultVertexCount+1);
-                Vector3 pos = Vector3.Reflect((Vector3)hits[0].point - this.transform.position, hits[0].normal);
-                //lineDict[target].SetPosition(2, pos);
+            {                
+                Vector3 pos = Vector3.Reflect((Vector3)hits[0].point - this.transform.position, hits[0].normal);                
                 collider.GetComponent<Mirror>().Shoot(hits[0].point, pos, colorDict[lineDict[target]]);
+            }
+            else if (collider.CompareTag("Glass"))
+            {
+                collider.GetComponent<ColoredGlass>().Shoot(hits[0].point, target.transform.position);
             }
             else if (collider.CompareTag("Button"))
             {

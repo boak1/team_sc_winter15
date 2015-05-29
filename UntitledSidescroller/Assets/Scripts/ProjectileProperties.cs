@@ -24,7 +24,8 @@ public class ProjectileProperties : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.CompareTag("Player") || hitInfo.CompareTag("Platform") || hitInfo.CompareTag("Panel"))
+        if (hitInfo.CompareTag("Player") || hitInfo.CompareTag("Platform") || 
+            hitInfo.CompareTag("Panel") || hitInfo.CompareTag("Mirror") || hitInfo.CompareTag("Glass"))
         {
             Destroy(this.gameObject);
         }
