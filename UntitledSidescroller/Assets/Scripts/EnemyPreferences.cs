@@ -18,16 +18,26 @@ public class EnemyPreferences : MonoBehaviour {
 	public bool killOffScreen = true;
 	public bool givesHp, diesOnContact = true, shoots = false;
 	public int contactDamage = 1, hp4Kill = 1, enemyHP = 1;
+	private int initEnemyHP;
+
     private SfxPlayer sfxPlayer;
     ShootingScript SS;    
 
-    void Start()
-    {
-        SS = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();  //Import ShootingScript
+    void Start(){
+		Debug.Log (initEnemyHP);
+
+
+		SS = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();  //Import ShootingScript
         sfxPlayer = GameObject.Find("SfxPlayer").GetComponent<SfxPlayer>();
+
+		initEnemyHP = enemyHP;
+		Debug.Log ("after: " + initEnemyHP);
+
         if (this.GetComponent<EnemyShooting>() != null)
             this.GetComponent<EnemyShooting>().enabled = false;
+
     }
+
     void OnBecameVisible()
     {
         ///Depending on what color this target is - link it with the appropriate target holder in the ShootingScript so that the ShootingScript
@@ -53,6 +63,9 @@ public class EnemyPreferences : MonoBehaviour {
 	public void tookDamage(){
 		if(initColor != COLOR.INDESTRUCTIBLE){
 		enemyHP -= SS.laserDamage;
+
+			gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, (.35f + (((float)enemyHP / (float)initEnemyHP)*.65f)));
+
 
 		if (enemyHP <= 0)
 				Destroy (this.gameObject);
