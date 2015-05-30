@@ -57,7 +57,7 @@
 //			}
 //			If 3count <=0;
 //			Break;
-		}
+//		}
 
 	
 //	void Update()
@@ -68,7 +68,7 @@
 //			changeColor();
 //			colorTimer = colorTimerInit;
 //		}
-	}
+//	}
 //	void changeColor()
 //	{
 //		if (coloredStuff.Contains(SS.redTarget))
