@@ -42,8 +42,12 @@ public class PlatformMapper : MonoBehaviour
 			else if (CM.direction == CameraMovement.Direction.Up || CM.direction == CameraMovement.Direction.Down)
 				ph.Sort (CompareY);
 			platformList = ph;
-			if(platformList.Count > 0)
-				PM.currentPlatform = platformList [0];
+			if(platformList.Count > 0){
+				if(CM.direction == CameraMovement.Direction.Right||CM.direction == CameraMovement.Direction.Down)
+					PM.currentPlatform = platformList [0];
+				else
+					PM.currentPlatform = platformList[platformList.Count - 1];
+			}
 			else
 				PM.currentPlatform = null;
 
