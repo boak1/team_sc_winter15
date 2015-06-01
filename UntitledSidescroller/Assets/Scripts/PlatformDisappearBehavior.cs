@@ -6,10 +6,14 @@ public class PlatformDisappearBehavior : MonoBehaviour {
     public float disappearDelay;
     public bool reappearEnable;
     public float reappearDelay;
-
+	public float stagger;
     private float timeElapsed = 0;
 
 	// Use this for initialization
+	void Start(){
+		timeElapsed -= stagger;
+		}
+
 	void Update () 
     {
         fadeOut();
