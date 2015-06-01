@@ -65,6 +65,9 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate()
     {        
+		if (currentPlatform == null)
+						return;
+
 		int PI = getPlayerIndex(), platSize = platMap.platformList.Count;
 
 		switch (moveIt)
