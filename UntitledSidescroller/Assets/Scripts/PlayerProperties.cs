@@ -3,14 +3,14 @@ using System.Collections;
 
 public class PlayerProperties : MonoBehaviour {
     private SfxPlayer sfxPlayer;
-	public bool imortal;
+	public bool immortal;
     void Start()
     {
         sfxPlayer = GameObject.Find("SfxPlayer").GetComponent<SfxPlayer>();
     }
     void OnCollisionEnter2D(Collision2D hitInfo)
     {
-        if (hitInfo.collider.CompareTag("Enemy") && !imortal)
+        if (hitInfo.collider.CompareTag("Enemy") && !immortal)
         {
             PlayerHealth.hp -= hitInfo.gameObject.GetComponent<EnemyPreferences>().contactDamage;
             if (hitInfo.gameObject.GetComponent<EnemyPreferences>().diesOnContact)
@@ -25,7 +25,7 @@ public class PlayerProperties : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-		if (hitInfo.CompareTag("Enemy Laser") && !imortal)
+		if (hitInfo.CompareTag("Enemy Laser") && !immortal)
 		{
 			PlayerHealth.hp -= hitInfo.gameObject.GetComponent<ProjectileProperties>().damage;
             sfxPlayer.PlaySfx("Hit_Hurt_loud");

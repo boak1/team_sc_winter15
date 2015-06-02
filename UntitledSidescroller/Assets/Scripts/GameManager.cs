@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     }
     public static void gameOver()
-    {        
+    {
         PlayerPrefs.SetInt("CurrentLevel", Application.loadedLevel);
         if (!GameWin.visible)
             Application.LoadLevel("Game Over");        
