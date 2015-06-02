@@ -29,4 +29,20 @@ public class Targetable : MonoBehaviour {
                 break;
         }
     }
+
+    void OnBecameInvisible()
+    {
+        switch (Color)
+        {
+            case COLOR.RED:
+                shootingScript.setRedTarget(null);
+                break;
+            case COLOR.GREEN:
+                shootingScript.setGreenTarget(null);
+                break;
+            case COLOR.BLUE:
+                shootingScript.setBlueTarget(null);
+                break;
+        }
+    }
 }
