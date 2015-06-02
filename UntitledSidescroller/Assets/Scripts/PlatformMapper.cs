@@ -51,8 +51,9 @@ public class PlatformMapper : MonoBehaviour
 			else
 				PM.currentPlatform = null;
 
-			if (PM.currentPlatform != null)
-				firstUpdate = false;
+            if (PM.currentPlatform != null)                            
+                firstUpdate = false;
+           				
 		} else {
 			if (shouldUpdate == 3) {
 				shouldUpdate = -1;

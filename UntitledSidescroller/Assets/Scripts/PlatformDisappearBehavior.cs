@@ -7,10 +7,13 @@ public class PlatformDisappearBehavior : MonoBehaviour {
     public bool reappearEnable;
     public float reappearDelay;
 	public float stagger;
-    private float timeElapsed = 0;
+    private float timeElapsed = 0; 
+    PlatformMapper platMap;
+    
 
 	// Use this for initialization
 	void Start(){
+        platMap = GameObject.Find("PlatformMapper").GetComponent<PlatformMapper>();
 		timeElapsed -= stagger;
 		}
 
@@ -34,12 +37,16 @@ public class PlatformDisappearBehavior : MonoBehaviour {
         if (reappearEnable)
             Invoke("Reappear", reappearDelay);
         gameObject.SetActive(false);
+        if (this.gameObject.CompareTag("Platform"))
+            platMap.Remove(this.gameObject);
     }
 
     void Reappear()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         gameObject.SetActive(true);
+        if (this.gameObject.CompareTag("Platform"))
+            platMap.Add(this.gameObject);
     }
 
 }

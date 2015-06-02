@@ -83,10 +83,10 @@ public class EnemyPreferences : MonoBehaviour {
 	{
 		if(givesHp)
 		{
-			Debug.Log("U HAVE HP!!!");
+			//Debug.Log("U HAVE HP!!!");
 			if( PlayerHealth.hp < PlayerHealth.maxHp)
 			{
-				Debug.Log("gimme hp");
+				//Debug.Log("gimme hp");
 				PlayerHealth.hp += hp4Kill;
 			}
 		}

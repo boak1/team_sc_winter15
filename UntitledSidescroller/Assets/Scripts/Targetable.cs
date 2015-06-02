@@ -11,7 +11,11 @@ public class Targetable : MonoBehaviour {
 
     void Start()
     {
-        shootingScript = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();
+        shootingScript = GameObject.Find("PlayerShooting").GetComponent<ShootingScript>();     
+    }
+
+    void OnBecameVisible()
+    {
         switch (Color)
         {
             case COLOR.RED:
@@ -24,6 +28,5 @@ public class Targetable : MonoBehaviour {
                 shootingScript.setBlueTarget(this.gameObject);
                 break;
         }
-
     }
 }
