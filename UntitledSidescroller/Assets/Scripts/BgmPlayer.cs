@@ -61,21 +61,21 @@ public class BgmPlayer : MonoBehaviour {
         }
 
         double time = AudioSettings.dspTime;
-
         if (time + 1.0f > nextEventTime)
         {
-            audioSources[flip].clip = currentTrack.clipList[index];
-            audioSources[flip].PlayScheduled(nextEventTime);
-
             // Prevent Update from interfering if a switchTrack flag is somehow triggered at the same time as this
             if (!changeFlagOn)
             {
+                Debug.Log("update() playing index " + index);
+                audioSources[flip].clip = currentTrack.clipList[index];
+                audioSources[flip].PlayScheduled(nextEventTime);
+
                 index = currentTrack.GetNextClipIndex(index);
+
+                nextEventTime += 60.0f / currentTrack.tempo * currentTrack.numBeatsPerClip;
+
+                flip = 1 - flip;
             }
-
-            nextEventTime += 60.0f / currentTrack.tempo * currentTrack.numBeatsPerClip;
-
-            flip = 1 - flip;
         }
 	}
     
@@ -90,14 +90,18 @@ public class BgmPlayer : MonoBehaviour {
 
         SetVolume(1.0f);
 
+        nextEventTime = AudioSettings.dspTime;
         currentTrack = trackDict[trackName];
         index = currentTrack.GetNextClipIndex(index, true);
+        Debug.Log("playing index " + index);
         nextEventTime += 60.0f / currentTrack.tempo * currentTrack.numBeatsPerClip;
         
         audioSources[flip].clip = currentTrack.clipList[index];
         audioSources[flip].Play();  
         flip = 1 - flip;
 
+        index = currentTrack.GetNextClipIndex(index);
+        Debug.Log("current index is now " + index);
         // Debug.Log("SwitchTrack: Scheduled clip " + index + " to AudioSource " + flip + " at start at time " + nextEventTime);
         changeFlagOn = false;
     }
